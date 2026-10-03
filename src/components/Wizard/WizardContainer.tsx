@@ -32,6 +32,18 @@ export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal })
     } catch {}
   }, [formData]);
 
+  // Check for return from Stripe payment
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('payment') === 'success' || urlParams.get('paid') === 'true') {
+      setCurrentStep(4);
+      const wizardEl = document.getElementById('wizard-section');
+      if (wizardEl) {
+        wizardEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
+
   const updateFormData = (fields: Partial<CBPFormData>) => {
     setFormData((prev) => ({ ...prev, ...fields }));
   };

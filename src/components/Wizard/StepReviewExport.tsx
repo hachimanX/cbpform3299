@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { CBPFormData } from '../../types/form';
 import { generateCBPForm3299, downloadPdf } from '../../lib/pdfGenerator';
 import { generatePackingListPdf } from '../../lib/packingListGenerator';
 import { 
   FileCheck, 
   Download, 
-  Sparkles, 
   ShieldCheck, 
   CheckCircle2, 
   AlertTriangle, 
-  FileSpreadsheet
+  FileSpreadsheet,
+  CreditCard,
+  Check
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+
+const STRIPE_CHECKOUT_URL = 'https://buy.stripe.com/6oU4gz2Y278m8wn667bZe01';
 
 interface StepReviewExportProps {
   data: CBPFormData;
@@ -32,6 +35,28 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
   const [isGeneratingPacking, setIsGeneratingPacking] = useState(false);
   const [unlockedPurchased, setUnlockedPurchased] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // Auto-detect return from Stripe payment
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPaid = urlParams.get('payment') === 'success' || urlParams.get('paid') === 'true';
+    if (isPaid && !unlockedPurchased) {
+      setUnlockedPurchased(true);
+
+      // Trigger celebration confetti
+      try {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#f59e0b', '#3b82f6', '#10b981'],
+        });
+      } catch {}
+
+      // Auto-trigger clean download
+      handleDownloadClean();
+    }
+  }, []);
 
   // Download Free Watermarked Sample
   const handleDownloadPreview = async () => {
@@ -60,24 +85,28 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
       setErrorMessage(null);
       const pdfBytes = await generateCBPForm3299(data, { isWatermarked: false });
       downloadPdf(pdfBytes, `CBP_Form_3299_OFFICIAL_${data.lastName || 'DECLARATION'}.pdf`);
-
       setUnlockedPurchased(true);
-
-      // Trigger celebration confetti
-      try {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#f59e0b', '#3b82f6', '#10b981'],
-        });
-      } catch {}
     } catch (err: any) {
       console.error(err);
       setErrorMessage(err.message || 'Failed to generate clean PDF');
     } finally {
       setIsGeneratingClean(false);
     }
+  };
+
+  // Redirect to Stripe Checkout
+  const handleProceedToStripe = () => {
+    if (!hasReviewedConsent) {
+      alert('Please review and agree to the declaration statement before proceeding.');
+      return;
+    }
+
+    try {
+      // Ensure data is saved locally so it's intact upon return
+      localStorage.setItem('cbp_3299_form_draft_v1', JSON.stringify(data));
+    } catch {}
+
+    window.location.href = STRIPE_CHECKOUT_URL;
   };
 
   // Download Free Supplemental Packing List
@@ -241,11 +270,28 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
       </div>
 
       {unlockedPurchased && (
-        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm flex items-center space-x-2">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-          <span>
-            <strong>Success!</strong> Your official clean CBP Form 3299 has been generated and downloaded. Check your downloads folder.
-          </span>
+        <div className="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-300 text-emerald-950 text-sm shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-in">
+          <div className="flex items-center space-x-3">
+            <div className="p-2 rounded-full bg-emerald-600 text-white shrink-0">
+              <Check className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-extrabold text-emerald-900 text-base">Payment Verified &amp; Unlocked!</div>
+              <p className="text-xs text-emerald-700">
+                Your clean vector CBP Form 3299 has been generated. You can download your official PDF and packing list below anytime.
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleDownloadClean}
+            disabled={isGeneratingClean}
+            className="px-5 py-2.5 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5"
+          >
+            <Download className="w-4 h-4" />
+            <span>Re-Download Clean PDF</span>
+          </button>
         </div>
       )}
 
@@ -295,7 +341,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
           </button>
         </div>
 
-        {/* Card 2: Official Clean Document Unlock ($4.99) */}
+        {/* Card 2: Official Clean Document Unlock ($4.99 via Stripe) */}
         <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-7 rounded-2xl border-2 border-amber-400/80 shadow-xl text-white flex flex-col justify-between space-y-5 relative overflow-hidden">
           {/* Badge */}
           <div className="absolute top-4 right-4">
@@ -343,17 +389,27 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
           </div>
 
           <div className="space-y-2.5 pt-2">
-            <button
-              type="button"
-              onClick={handleDownloadClean}
-              disabled={isGeneratingClean || !hasReviewedConsent}
-              className="w-full py-4 px-6 rounded-xl text-base font-extrabold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-amber-400 shadow-lg hover:shadow-amber-400/25 transition-all transform hover:-translate-y-0.5 flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
-            >
-              <Sparkles className="w-5 h-5 text-slate-950" />
-              <span>
-                {isGeneratingClean ? 'Generating Official Document...' : 'Unlock & Download Official PDF ($4.99)'}
-              </span>
-            </button>
+            {unlockedPurchased ? (
+              <button
+                type="button"
+                onClick={handleDownloadClean}
+                disabled={isGeneratingClean}
+                className="w-full py-4 px-6 rounded-xl text-base font-extrabold text-slate-950 bg-gradient-to-r from-emerald-400 via-emerald-300 to-green-400 hover:from-emerald-300 hover:to-emerald-400 shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer"
+              >
+                <Download className="w-5 h-5 text-slate-950" />
+                <span>Download Official Clean PDF Now</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleProceedToStripe}
+                disabled={!hasReviewedConsent}
+                className="w-full py-4 px-6 rounded-xl text-base font-extrabold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-amber-400 shadow-lg hover:shadow-amber-400/25 transition-all transform hover:-translate-y-0.5 flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
+              >
+                <CreditCard className="w-5 h-5 text-slate-950" />
+                <span>Pay $4.99 &amp; Unlock Official PDF</span>
+              </button>
+            )}
 
             <button
               type="button"
