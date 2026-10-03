@@ -25,7 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Generate Your Official <br />
+            Prepare Your Compliant <br />
             <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
               CBP Form 3299
             </span>{' '}

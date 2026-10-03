@@ -70,7 +70,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
               <span className="text-xs font-bold uppercase text-amber-400 tracking-wider">
                 cbpform3299.com
               </span>
-              <h3 className="text-xl font-extrabold text-white">Full Official Generator</h3>
+              <h3 className="text-xl font-extrabold text-white">Complete Declaration Package</h3>
               <div className="flex items-baseline space-x-2">
                 <span className="text-slate-400 line-through text-lg font-bold">$9.99</span>
                 <span className="text-3xl sm:text-4xl font-extrabold text-amber-400">$4.99</span>
@@ -82,10 +82,10 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
                 <span>Single payment • No subscription ever</span>
               </div>
 
-              <ul className="text-xs text-slate-300 space-y-2.5 pt-2">
+              <ul className="text-xs text-slate-300 space-y-2.5 pt-1">
                 <li className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Clean official PDF download (Zero watermark)</span>
+                  <span>Clean, print-ready PDF export (Zero watermark)</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />

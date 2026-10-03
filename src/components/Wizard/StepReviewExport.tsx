@@ -358,7 +358,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
             </div>
 
             <h4 className="text-xl font-extrabold text-white">
-              Official Clean PDF + Free Packing List
+              Complete Form 3299 + Free Packing List
             </h4>
 
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -397,7 +397,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
                 className="w-full py-4 px-6 rounded-xl text-base font-extrabold text-slate-950 bg-gradient-to-r from-emerald-400 via-emerald-300 to-green-400 hover:from-emerald-300 hover:to-emerald-400 shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <Download className="w-5 h-5 text-slate-950" />
-                <span>Download Official Clean PDF Now</span>
+                <span>Download Print-Ready Form 3299 Now</span>
               </button>
             ) : (
               <button
@@ -407,7 +407,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
                 className="w-full py-4 px-6 rounded-xl text-base font-extrabold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-amber-400 shadow-lg hover:shadow-amber-400/25 transition-all transform hover:-translate-y-0.5 flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
               >
                 <CreditCard className="w-5 h-5 text-slate-950" />
-                <span>Pay $4.99 &amp; Unlock Official PDF</span>
+                <span>Pay $4.99 &amp; Unlock Form 3299 PDF</span>
               </button>
             )}
 
