@@ -136,25 +136,37 @@ export async function generateCBPForm3299(
     for (const page of pages) {
       const { width, height } = page.getSize();
       
-      // Draw primary diagonal watermark
+      // Top diagonal watermark
+      page.drawText('PREVIEW ONLY • NOT VALID FOR CBP FILING', {
+        x: width * 0.1,
+        y: height * 0.72,
+        size: 22,
+        font: boldFont,
+        color: rgb(0.85, 0.2, 0.2),
+        rotate: degrees(38),
+        opacity: 0.22,
+      });
+
+      // Center primary diagonal watermark
       page.drawText('PREVIEW COPY • NOT FOR CBP SUBMISSION', {
-        x: width * 0.08,
-        y: height * 0.45,
+        x: width * 0.05,
+        y: height * 0.44,
         size: 26,
         font: boldFont,
         color: rgb(0.85, 0.15, 0.15),
-        rotate: degrees(42),
-        opacity: 0.18,
+        rotate: degrees(38),
+        opacity: 0.25,
       });
 
-      page.drawText('cbpform3299.com • UNVERIFIED DRAFT', {
+      // Bottom diagonal watermark
+      page.drawText('cbpform3299.com • PROOFREAD DRAFT • UNVERIFIED', {
         x: width * 0.12,
-        y: height * 0.38,
+        y: height * 0.18,
         size: 18,
         font: boldFont,
         color: rgb(0.4, 0.4, 0.4),
-        rotate: degrees(42),
-        opacity: 0.15,
+        rotate: degrees(38),
+        opacity: 0.22,
       });
     }
   }

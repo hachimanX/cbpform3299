@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import type { CBPFormData } from '../../types/form';
 import { generateCBPForm3299, downloadPdf } from '../../lib/pdfGenerator';
 import { generatePackingListPdf } from '../../lib/packingListGenerator';
+import { renderPdfToRasterImages, downloadBlob } from '../../lib/pdfRasterizer';
+import { WatermarkPreviewModal } from './WatermarkPreviewModal';
 import { 
   FileCheck, 
   Download, 
@@ -10,7 +12,8 @@ import {
   AlertTriangle, 
   FileSpreadsheet,
   CreditCard,
-  Check
+  Check,
+  Eye
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -30,7 +33,10 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
   onOpenLegal,
 }) => {
   const [hasReviewedConsent, setHasReviewedConsent] = useState(true);
-  const [isGeneratingWatermark, setIsGeneratingWatermark] = useState(false);
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [combinedBlob, setCombinedBlob] = useState<Blob | null>(null);
+  const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
   const [isGeneratingClean, setIsGeneratingClean] = useState(false);
   const [isGeneratingPacking, setIsGeneratingPacking] = useState(false);
   const [unlockedPurchased, setUnlockedPurchased] = useState(false);
@@ -58,18 +64,52 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
     }
   }, []);
 
-  // Download Free Watermarked Sample
-  const handleDownloadPreview = async () => {
+  // Open Watermarked Raster PNG Preview Modal
+  const handleOpenPreviewModal = async () => {
     try {
-      setIsGeneratingWatermark(true);
+      setIsGeneratingPreview(true);
       setErrorMessage(null);
+
+      if (previewImages.length > 0 && combinedBlob) {
+        setIsPreviewModalOpen(true);
+        return;
+      }
+
       const pdfBytes = await generateCBPForm3299(data, { isWatermarked: true });
-      downloadPdf(pdfBytes, `CBP_3299_SAMPLE_PREVIEW_${data.lastName || 'DECLARATION'}.pdf`);
+      const result = await renderPdfToRasterImages(pdfBytes);
+      setPreviewImages(result.pageImages);
+      setCombinedBlob(result.combinedBlob);
+      setIsPreviewModalOpen(true);
     } catch (err: any) {
-      console.error(err);
-      setErrorMessage(err.message || 'Failed to generate preview PDF');
+      console.error('Failed to generate PNG preview:', err);
+      setErrorMessage(err.message || 'Failed to generate PNG preview');
     } finally {
-      setIsGeneratingWatermark(false);
+      setIsGeneratingPreview(false);
+    }
+  };
+
+  // Directly Download Watermarked PNG Preview Image
+  const handleDownloadPreviewPng = async () => {
+    try {
+      setIsGeneratingPreview(true);
+      setErrorMessage(null);
+
+      let blob = combinedBlob;
+      if (!blob) {
+        const pdfBytes = await generateCBPForm3299(data, { isWatermarked: true });
+        const result = await renderPdfToRasterImages(pdfBytes);
+        setPreviewImages(result.pageImages);
+        setCombinedBlob(result.combinedBlob);
+        blob = result.combinedBlob;
+      }
+
+      const fileName = `CBP_3299_PREVIEW_${data.lastName ? data.lastName.toUpperCase() : 'DECLARATION'}.png`;
+      downloadBlob(blob, fileName);
+    } catch (err: any) {
+      console.error('Failed to download preview PNG:', err);
+      setErrorMessage(err.message || 'Failed to download preview PNG');
+    } finally {
+      setIsGeneratingPreview(false);
     }
   };
 
@@ -304,41 +344,58 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
 
       {/* Main Download Options Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Card 1: Free Watermarked Preview */}
+        {/* Card 1: Free Watermarked Preview (Raster PNG) */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-5">
           <div className="space-y-3">
-            <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-slate-100 text-slate-700">
-              <span>Free Option</span>
+            <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-blue-50 text-blue-800 border border-blue-200">
+              <Eye className="w-3.5 h-3.5 text-blue-600" />
+              <span>Free Option • Watermarked PNG</span>
             </div>
-            <h4 className="text-xl font-bold text-slate-900">Download Watermarked Preview</h4>
+            <h4 className="text-xl font-bold text-slate-900">Preview Form 3299 (PNG Image)</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
-              Verify your information formatted on the official PDF. Includes a diagonal &quot;SAMPLE / PREVIEW&quot; watermark. Perfect for proofreading before official submission.
+              Verify your information accurately formatted on the official layout before paying. Generated as a watermarked raster PNG image to protect against copy-paste tampering. Customs &amp; movers require the clean vector PDF.
             </p>
 
             <ul className="text-xs text-slate-600 space-y-1.5 pt-2">
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
-                <span>Instant PDF compilation in browser</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                <span>Instant visual proofreading in browser</span>
               </li>
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-slate-400" />
-                <span>Official 3-page CBP 3299 layout</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                <span>Raster PNG image (text copy-paste disabled)</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                <span>Includes Page 1 &amp; Page 2 declarations</span>
               </li>
               <li className="flex items-center space-x-2 text-slate-400">
-                <span>• Includes diagonal preview watermark</span>
+                <span>• Contains diagonal verification watermarks</span>
               </li>
             </ul>
           </div>
 
-          <button
-            type="button"
-            onClick={handleDownloadPreview}
-            disabled={isGeneratingWatermark}
-            className="w-full py-3 px-4 rounded-xl text-sm font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
-          >
-            <Download className="w-4 h-4" />
-            <span>{isGeneratingWatermark ? 'Generating Sample...' : 'Download Free Watermarked PDF'}</span>
-          </button>
+          <div className="space-y-2.5 pt-2">
+            <button
+              type="button"
+              onClick={handleOpenPreviewModal}
+              disabled={isGeneratingPreview}
+              className="w-full py-3 px-4 rounded-xl text-sm font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
+            >
+              <Eye className="w-4 h-4" />
+              <span>{isGeneratingPreview ? 'Rendering Preview Images...' : 'View On-Screen Preview'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleDownloadPreviewPng}
+              disabled={isGeneratingPreview}
+              className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
+            >
+              <Download className="w-3.5 h-3.5 text-slate-600" />
+              <span>Download Preview (PNG Image)</span>
+            </button>
+          </div>
         </div>
 
         {/* Card 2: Official Clean Document Unlock ($4.99 via Stripe) */}
@@ -446,6 +503,16 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
           ← Back to Articles
         </button>
       </div>
+
+      {/* Watermarked Raster PNG Preview Modal */}
+      <WatermarkPreviewModal
+        isOpen={isPreviewModalOpen}
+        onClose={() => setIsPreviewModalOpen(false)}
+        pageImages={previewImages}
+        combinedBlob={combinedBlob}
+        lastName={data.lastName}
+        onProceedToPayment={handleProceedToStripe}
+      />
     </div>
   );
 };
