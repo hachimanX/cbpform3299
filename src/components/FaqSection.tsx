@@ -45,7 +45,7 @@ const faqs: FaqItem[] = [
   {
     question: 'What if my mover or broker rejects the generated form?',
     answer:
-      'We format our output strictly using the latest official CBP Form 3299 (Rev. 05/24) template with exact federal AcroForm fields. In the unlikely event that your moving agent or customs officer rejects the document layout, we offer a 100% money-back guarantee within 14 days of purchase.',
+      'We format our output strictly using the latest official CBP Form 3299 (Rev. 05/24) template with exact federal AcroForm fields. In the unlikely event that your moving agent or customs officer rejects the document layout, we offer a refund guarantee (minus third-party payment processing fees). Simply email written proof of carrier rejection to support@cbpform3299.com within 14 days of purchase.',
   },
 ];
 

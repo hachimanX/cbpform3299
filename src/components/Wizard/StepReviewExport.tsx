@@ -383,7 +383,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
               </li>
               <li className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>14-Day Money-Back Guarantee if rejected by mover</span>
+                <span>14-Day Acceptance Guarantee (carrier rejection proof required)</span>
               </li>
             </ul>
           </div>
@@ -422,6 +422,16 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
                 {isGeneratingPacking ? 'Generating Packing List...' : 'Download Free Customs Packing List Only'}
               </span>
             </button>
+
+            <div className="text-center pt-1">
+              <button
+                type="button"
+                onClick={() => onOpenLegal('refund')}
+                className="text-[11px] text-slate-400 hover:text-slate-200 underline cursor-pointer"
+              >
+                14-Day Guarantee Terms &amp; Carrier Rejection Policy
+              </button>
+            </div>
           </div>
         </div>
       </div>

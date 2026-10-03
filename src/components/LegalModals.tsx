@@ -161,28 +161,39 @@ export const LegalModals: React.FC<LegalModalsProps> = ({ page, onClose, onSelec
 
           {page === 'refund' && (
             <>
-              <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 space-y-1">
+              <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 space-y-2">
                 <span className="font-bold flex items-center space-x-1.5">
                   <RefreshCw className="w-4 h-4 text-blue-600 shrink-0" />
-                  <span>14-Day 100% Satisfaction Guarantee</span>
+                  <span>14-Day Formatting Acceptance Guarantee</span>
                 </span>
                 <p>
-                  We stand by the formatting accuracy of our generated CBP Form 3299 declarations. If your international moving company or customs broker rejects the layout of your generated PDF, we will promptly refund 100% of your $4.99 purchase.
+                  We stand behind the formatting accuracy of our generated CBP Form 3299 declarations. If your international moving company or licensed customs broker rejects the layout or field structure of your generated PDF, we will promptly refund your $4.99 purchase (minus third-party payment processing fees, e.g., Stripe transaction fee of $0.44).
                 </p>
               </div>
 
-              <h4 className="font-bold text-slate-900 text-base">How to Request a Refund:</h4>
-              <ol className="list-decimal pl-5 space-y-2 text-xs sm:text-sm">
+              <h4 className="font-bold text-slate-900 text-base">Fraud Prevention &amp; Proof Requirement:</h4>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Because digital goods are immediately generated and rendered directly on your device, written proof is strictly required to prevent abuse and refund loopholes. To qualify for a refund, you must provide formal written verification (such as an email or rejection letter) from your moving carrier, freight forwarder, or licensed customs broker explicitly confirming that the PDF layout or AcroForm structure was rejected.
+              </p>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Refunds are not granted for changes of mind, personal scheduling cancellations, or errors resulting from inaccurate user data input into the questionnaire.
+              </p>
+
+              <h4 className="font-bold text-slate-900 text-base">How to Claim a Refund:</h4>
+              <ol className="list-decimal pl-5 space-y-2 text-xs sm:text-sm text-slate-600">
                 <li>
                   Email our support desk at{' '}
                   <a href="mailto:support@cbpform3299.com" className="text-blue-600 underline font-semibold">
                     support@cbpform3299.com
                   </a>{' '}
-                  within 14 days of your purchase.
+                  within 14 calendar days of your original purchase.
                 </li>
-                <li>Include your name and order email address.</li>
+                <li>Include your name, order email address, and Stripe transaction receipt number.</li>
                 <li>
-                  We will process your refund via Stripe back to your original payment method within 24 to 48 hours. No complicated questionnaires or hoops.
+                  Attach the formal written rejection communication received from your moving company or customs broker citing the document layout rejection.
+                </li>
+                <li>
+                  Once verified, your refund (purchase price minus the non-refundable third-party processing fee) will be credited directly back to your original payment method within 24 to 48 hours.
                 </li>
               </ol>
             </>

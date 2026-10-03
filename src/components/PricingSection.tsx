@@ -101,7 +101,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
                 </li>
                 <li className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>14-Day Money-Back Guarantee</span>
+                  <span>14-Day Layout Guarantee (with carrier proof)</span>
                 </li>
               </ul>
             </div>
