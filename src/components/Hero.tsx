@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
               <div className="flex items-center space-x-2.5">
                 <span className="text-slate-400 line-through text-lg font-semibold">$9.99</span>
                 <span className="text-2xl sm:text-3xl font-extrabold text-amber-400">$4.99</span>
-                <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-400 text-slate-950 uppercase tracking-wide">
+                <span className="whitespace-nowrap px-2.5 py-0.5 rounded text-[11px] font-bold bg-amber-400 text-slate-950 uppercase tracking-wide">
                   50% OFF Launch Special
                 </span>
               </div>

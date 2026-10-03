@@ -401,8 +401,8 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
         {/* Card 2: Official Clean Document Unlock ($4.99 via Stripe) */}
         <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-7 rounded-2xl border-2 border-amber-400/80 shadow-xl text-white flex flex-col justify-between space-y-5 relative overflow-hidden">
           {/* Badge */}
-          <div className="absolute top-4 right-4">
-            <span className="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-amber-400 text-slate-950 uppercase tracking-wide shadow-sm">
+          <div className="absolute top-4 right-4 z-10">
+            <span className="whitespace-nowrap px-3 py-1 rounded-full text-[11px] font-extrabold bg-amber-400 text-slate-950 uppercase tracking-wide shadow-sm">
               Launch Deal • 50% Off
             </span>
           </div>

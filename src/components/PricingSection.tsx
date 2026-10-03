@@ -60,8 +60,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
 
           {/* OUR TOOL (Hero Card) */}
           <div className="p-6 sm:p-8 rounded-2xl border-2 border-amber-400 bg-gradient-to-b from-slate-900 to-slate-950 text-white shadow-xl flex flex-col justify-between space-y-6 relative">
-            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-              <span className="px-3.5 py-1 rounded-full text-[11px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 uppercase tracking-wider shadow-sm">
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+              <span className="whitespace-nowrap px-4 py-1 rounded-full text-[11px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 uppercase tracking-wider shadow-sm">
                 Most Popular • 50% Off
               </span>
             </div>
