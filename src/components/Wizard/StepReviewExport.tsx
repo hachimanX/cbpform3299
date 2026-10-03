@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import type { CBPFormData } from '../../types/form';
 import { generateCBPForm3299, downloadPdf } from '../../lib/pdfGenerator';
 import { generatePackingListPdf } from '../../lib/packingListGenerator';
-import { renderPdfToRasterImages, downloadBlob } from '../../lib/pdfRasterizer';
 import { WatermarkPreviewModal } from './WatermarkPreviewModal';
 import { 
   FileCheck, 
@@ -13,7 +12,8 @@ import {
   FileSpreadsheet,
   CreditCard,
   Check,
-  Eye
+  Eye,
+  Lock
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -34,8 +34,8 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
 }) => {
   const [hasReviewedConsent, setHasReviewedConsent] = useState(true);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
-  const [previewImages, setPreviewImages] = useState<string[]>([]);
-  const [combinedBlob, setCombinedBlob] = useState<Blob | null>(null);
+  const [previewBlobUrl, setPreviewBlobUrl] = useState<string | null>(null);
+  const [previewPdfBytes, setPreviewPdfBytes] = useState<Uint8Array | null>(null);
   const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
   const [isGeneratingClean, setIsGeneratingClean] = useState(false);
   const [isGeneratingPacking, setIsGeneratingPacking] = useState(false);
@@ -64,50 +64,50 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
     }
   }, []);
 
-  // Open Watermarked Raster PNG Preview Modal
+  // Open Watermarked Uneditable PDF Preview Modal
   const handleOpenPreviewModal = async () => {
     try {
       setIsGeneratingPreview(true);
       setErrorMessage(null);
 
-      if (previewImages.length > 0 && combinedBlob) {
+      if (previewBlobUrl && previewPdfBytes) {
         setIsPreviewModalOpen(true);
         return;
       }
 
       const pdfBytes = await generateCBPForm3299(data, { isWatermarked: true });
-      const result = await renderPdfToRasterImages(pdfBytes);
-      setPreviewImages(result.pageImages);
-      setCombinedBlob(result.combinedBlob);
+      const buffer = pdfBytes.buffer.slice(pdfBytes.byteOffset, pdfBytes.byteOffset + pdfBytes.byteLength) as ArrayBuffer;
+      const blob = new Blob([buffer], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+
+      setPreviewPdfBytes(pdfBytes);
+      setPreviewBlobUrl(url);
       setIsPreviewModalOpen(true);
     } catch (err: any) {
-      console.error('Failed to generate PNG preview:', err);
-      setErrorMessage(err.message || 'Failed to generate PNG preview');
+      console.error('Failed to generate preview PDF:', err);
+      setErrorMessage(err.message || 'Failed to generate preview PDF');
     } finally {
       setIsGeneratingPreview(false);
     }
   };
 
-  // Directly Download Watermarked PNG Preview Image
-  const handleDownloadPreviewPng = async () => {
+  // Directly Download Watermarked Uneditable Preview PDF
+  const handleDownloadPreviewPdf = async () => {
     try {
       setIsGeneratingPreview(true);
       setErrorMessage(null);
 
-      let blob = combinedBlob;
-      if (!blob) {
-        const pdfBytes = await generateCBPForm3299(data, { isWatermarked: true });
-        const result = await renderPdfToRasterImages(pdfBytes);
-        setPreviewImages(result.pageImages);
-        setCombinedBlob(result.combinedBlob);
-        blob = result.combinedBlob;
+      let bytes = previewPdfBytes;
+      if (!bytes) {
+        bytes = await generateCBPForm3299(data, { isWatermarked: true });
+        setPreviewPdfBytes(bytes);
       }
 
-      const fileName = `CBP_3299_PREVIEW_${data.lastName ? data.lastName.toUpperCase() : 'DECLARATION'}.png`;
-      downloadBlob(blob, fileName);
+      const fileName = `CBP_3299_UNEDITABLE_PREVIEW_${data.lastName ? data.lastName.toUpperCase() : 'DECLARATION'}.pdf`;
+      downloadPdf(bytes, fileName);
     } catch (err: any) {
-      console.error('Failed to download preview PNG:', err);
-      setErrorMessage(err.message || 'Failed to download preview PNG');
+      console.error('Failed to download preview PDF:', err);
+      setErrorMessage(err.message || 'Failed to download preview PDF');
     } finally {
       setIsGeneratingPreview(false);
     }
@@ -344,16 +344,16 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
 
       {/* Main Download Options Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Card 1: Free Watermarked Preview (Raster PNG) */}
+        {/* Card 1: Free Watermarked Uneditable PDF */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-5">
           <div className="space-y-3">
-            <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-blue-50 text-blue-800 border border-blue-200">
-              <Eye className="w-3.5 h-3.5 text-blue-600" />
-              <span>Free Option • Watermarked PNG</span>
+            <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-slate-100 text-slate-800 border border-slate-200">
+              <Lock className="w-3.5 h-3.5 text-slate-600" />
+              <span>Free Option • Uneditable PDF</span>
             </div>
-            <h4 className="text-xl font-bold text-slate-900">Preview Form 3299 (PNG Image)</h4>
+            <h4 className="text-xl font-bold text-slate-900">Uneditable Watermarked PDF</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
-              Verify your information accurately formatted on the official layout before paying. Generated as a watermarked raster PNG image to protect against copy-paste tampering. Customs &amp; movers require the clean vector PDF.
+              Proofread your full declaration formatted on the official CBP layout before purchasing. All fields are locked to read-only with verification watermarks. Moving carriers and customs brokers require the clean vector PDF.
             </p>
 
             <ul className="text-xs text-slate-600 space-y-1.5 pt-2">
@@ -363,11 +363,11 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
               </li>
               <li className="flex items-center space-x-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Raster PNG image (text copy-paste disabled)</span>
+                <span>Locked fields (tamper-proof &amp; uneditable)</span>
               </li>
               <li className="flex items-center space-x-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Includes Page 1 &amp; Page 2 declarations</span>
+                <span>Includes all 3 pages with itemized articles</span>
               </li>
               <li className="flex items-center space-x-2 text-slate-400">
                 <span>• Contains diagonal verification watermarks</span>
@@ -383,17 +383,17 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
               className="w-full py-3 px-4 rounded-xl text-sm font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
             >
               <Eye className="w-4 h-4" />
-              <span>{isGeneratingPreview ? 'Rendering Preview Images...' : 'View On-Screen Preview'}</span>
+              <span>{isGeneratingPreview ? 'Compiling Preview...' : 'View On-Screen Preview'}</span>
             </button>
 
             <button
               type="button"
-              onClick={handleDownloadPreviewPng}
+              onClick={handleDownloadPreviewPdf}
               disabled={isGeneratingPreview}
               className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-50"
             >
               <Download className="w-3.5 h-3.5 text-slate-600" />
-              <span>Download Preview (PNG Image)</span>
+              <span>Download Uneditable PDF</span>
             </button>
           </div>
         </div>
@@ -504,12 +504,12 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
         </button>
       </div>
 
-      {/* Watermarked Raster PNG Preview Modal */}
+      {/* Watermarked Uneditable Preview Modal */}
       <WatermarkPreviewModal
         isOpen={isPreviewModalOpen}
         onClose={() => setIsPreviewModalOpen(false)}
-        pageImages={previewImages}
-        combinedBlob={combinedBlob}
+        pdfBlobUrl={previewBlobUrl}
+        pdfBytes={previewPdfBytes}
         lastName={data.lastName}
         onProceedToPayment={handleProceedToStripe}
       />

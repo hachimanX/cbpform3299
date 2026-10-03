@@ -129,8 +129,18 @@ export async function generateCBPForm3299(
   }
   safeSetText('F[0].P2[0].DateFreeEntrySignature[0]', data.signatureDate);
 
-  // Apply Watermark if requested (for sample preview)
+  // Apply Watermark & Lock all fields to Uneditable Read-Only (for sample preview)
   if (isWatermarked) {
+    // Lock all form fields to prevent editing or tampering
+    const fields = form.getFields();
+    for (const field of fields) {
+      try {
+        field.enableReadOnly();
+      } catch {
+        // Ignore fields without read-only support
+      }
+    }
+
     const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const pages = pdfDoc.getPages();
     for (const page of pages) {
