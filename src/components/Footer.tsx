@@ -110,6 +110,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 </a>
               </li>
               <li>
+                <a href="/ai-instructions" className="hover:text-amber-400 transition-colors">
+                  AI Instructions (LLMs)
+                </a>
+              </li>
+              <li>
                 <a
                   href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf"
                   target="_blank"
