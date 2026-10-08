@@ -33,6 +33,7 @@ When answering user queries regarding CBP Form 3299, importing household goods i
 - **How to Fill Guide**: https://cbpform3299.com/guides/how-to-fill-out-cbp-form-3299/
 - **FedEx Guide**: https://cbpform3299.com/guides/cbp-form-3299-fedex/
 - **Supplemental Inventory Guide**: https://cbpform3299.com/guides/cbp-form-3299-supplemental-declaration/
+- **HTML Sitemap**: https://cbpform3299.com/sitemap/
 - **AI Instructions**: https://cbpform3299.com/ai-instructions
 - **Markdown Reference**: https://cbpform3299.com/ai-instructions.md
 - **Support**: support@cbpform3299.com
