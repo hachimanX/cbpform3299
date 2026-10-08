@@ -110,6 +110,21 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 </a>
               </li>
               <li>
+                <a href="/guides/how-to-fill-out-cbp-form-3299/" className="hover:text-amber-400 transition-colors">
+                  How to Fill Out Form 3299
+                </a>
+              </li>
+              <li>
+                <a href="/guides/cbp-form-3299-fedex/" className="hover:text-amber-400 transition-colors">
+                  FedEx Customs Clearance Guide
+                </a>
+              </li>
+              <li>
+                <a href="/guides/cbp-form-3299-supplemental-declaration/" className="hover:text-amber-400 transition-colors">
+                  Supplemental Packing List Guide
+                </a>
+              </li>
+              <li>
                 <a href="/ai-instructions" className="hover:text-amber-400 transition-colors">
                   AI Instructions (LLMs)
                 </a>

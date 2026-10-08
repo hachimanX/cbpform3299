@@ -123,6 +123,65 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
               </li>
             </ul>
           </div>
+
+          {/* Deep-Dive Compliance Guides */}
+          <div className="space-y-6 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-200 pb-3">
+              <h3 className="text-2xl font-bold text-slate-900">
+                Official Customs &amp; Carrier Reference Guides
+              </h3>
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                Updated for 2026 Regulations
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <a
+                href="/guides/how-to-fill-out-cbp-form-3299/"
+                className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-amber-400 hover:shadow-md transition-all space-y-2.5 block"
+              >
+                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold">
+                  <span>Pillar Guide</span>
+                </div>
+                <h4 className="font-bold text-slate-950 text-sm group-hover:text-blue-600 transition-colors">
+                  How to Fill Out Form 3299 &rarr;
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Line-by-line instructions, residency status rules (19 CFR 148), and 1-year duty-free exemption criteria.
+                </p>
+              </a>
+
+              <a
+                href="/guides/cbp-form-3299-fedex/"
+                className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-amber-400 hover:shadow-md transition-all space-y-2.5 block"
+              >
+                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">
+                  <span>Express Carrier</span>
+                </div>
+                <h4 className="font-bold text-slate-950 text-sm group-hover:text-blue-600 transition-colors">
+                  FedEx Customs Clearance Guide &rarr;
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  How to resolve FedEx clearance delay holds at Memphis &amp; Indy hubs, AWB mapping, and passenger travel proof.
+                </p>
+              </a>
+
+              <a
+                href="/guides/cbp-form-3299-supplemental-declaration/"
+                className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-amber-400 hover:shadow-md transition-all space-y-2.5 block"
+              >
+                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                  <span>Packing List</span>
+                </div>
+                <h4 className="font-bold text-slate-950 text-sm group-hover:text-blue-600 transition-colors">
+                  Supplemental Declaration &rarr;
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Formatting your itemized packing inventory, declaring wine cellars, and ATF ammunition regulations.
+                </p>
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* CTA Banner */}
