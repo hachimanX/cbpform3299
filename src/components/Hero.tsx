@@ -101,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
               <div>
                 <h3 className="text-sm font-bold text-white">Official 05/24 CBP Format</h3>
                 <p className="text-xs text-slate-400 mt-1 leading-normal">
-                  Fills official AcroForm fields accepted by all ocean freight, air cargo carriers, and licensed customs brokers.
+                  Fills the fields of the official CBP Form 3299 PDF (Rev. 05/24), the same form carriers and customs brokers ask for.
                 </p>
               </div>
             </div>
