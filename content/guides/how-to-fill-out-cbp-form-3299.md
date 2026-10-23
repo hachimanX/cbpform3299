@@ -77,7 +77,7 @@ Why spend your evening deciphering bureaucratic codes and worrying about customs
 
 ## 3. Instant In-Browser Generator (Embed)
 
-> ### ⚡ Generate Your Official CBP Form 3299 in 5 Minutes
+> ### ⚡ Fill in your Form 3299 in 5 Minutes
 > Skip the confusion. Answer simple, everyday questions—our guided engine fills out the official **CBP Form 3299 (Rev. 05/24)** and generates your **Supplemental Customs Packing List** automatically.
 > 
 > * **100% Client-Side Privacy:** Your sensitive personal data (SSN, passport, address) never leaves your browser.
@@ -213,4 +213,4 @@ CBP provides a blank, static PDF on its government portal, but it does not valid
 * **[CBP Form 3299 for FedEx Shipments: How to Clear Customs Holds →](/guides/cbp-form-3299-fedex)**
 * **[Supplemental Declaration & List of Articles: How to Itemize Household Goods →](/guides/cbp-form-3299-supplemental-declaration)**
 * **[Machine-Readable AI Guidance & Instructions →](/ai-instructions)**
-* **[Start Official CBP Form 3299 Generator ($4.99) →](https://cbpform3299.com/#wizard-section)**
+* **[Start the Form 3299 fill-in tool ($4.99) →](https://cbpform3299.com/#wizard-section)**

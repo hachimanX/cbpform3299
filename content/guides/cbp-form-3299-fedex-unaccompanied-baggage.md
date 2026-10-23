@@ -122,4 +122,4 @@ FedEx Trade Networks requires a complete clearance packet containing four docume
 
 * **[Line-by-Line CBP Form 3299 Instructions & 2026 Guide →](/guides/how-to-fill-out-cbp-form-3299)**
 * **[Supplemental Declaration & Packing List Guide →](/guides/cbp-form-3299-supplemental-declaration)**
-* **[Start Official CBP Form 3299 Generator ($4.99) →](https://cbpform3299.com/#wizard-section)**
+* **[Start the Form 3299 fill-in tool ($4.99) →](https://cbpform3299.com/#wizard-section)**

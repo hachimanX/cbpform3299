@@ -15,12 +15,12 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-6">
-          {/* Official Form Badge */}
+          {/* Form Revision Badge */}
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-slate-300 shadow-inner">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>Updated for 2024–2026 Regulations (Rev. 05/24)</span>
             <span className="text-slate-500">•</span>
-            <span className="text-amber-400 font-bold">19 CFR 148.6 Compliant</span>
+            <span className="text-amber-400 font-bold">Based on 19 CFR 148.6</span>
           </div>
 
           {/* Main Headline */}
@@ -37,15 +37,11 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
             Shipping household goods or unaccompanied baggage to the United States? Stop wrestling with confusing tariff codes and rigid PDF boxes. Answer simple questions, preview for free, and download your print-ready declaration instantly.
           </p>
 
-          {/* Pricing Highlight: Anchored $9.99 slashed to $4.99 */}
+          {/* Pricing Highlight */}
           <div className="pt-2">
             <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3 p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/80 shadow-lg">
               <div className="flex items-center space-x-2.5">
-                <span className="text-slate-400 line-through text-lg font-semibold">$9.99</span>
                 <span className="text-2xl sm:text-3xl font-extrabold text-amber-400">$4.99</span>
-                <span className="whitespace-nowrap px-2.5 py-0.5 rounded text-[11px] font-bold bg-amber-400 text-slate-950 uppercase tracking-wide">
-                  50% OFF Launch Special
-                </span>
               </div>
               <span className="hidden sm:inline text-slate-600">|</span>
               <div className="text-xs text-slate-300 flex items-center space-x-1.5">
@@ -54,6 +50,10 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
                 <span>NEVER a recurring subscription. No hidden fees.</span>
               </div>
             </div>
+            <p className="text-xs text-slate-300 mt-2">
+              Not affiliated with CBP. The blank form is free at{' '}
+              <a href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf" target="_blank" rel="noreferrer" className="underline text-amber-300">cbp.gov</a>. $4.99 pays for our fill-in tool.
+            </p>
           </div>
 
           {/* CTA Buttons */}
@@ -99,9 +99,9 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">Official 05/24 CBP Format</h3>
+                <h3 className="text-sm font-bold text-white">Uses the current CBP Form 3299 (Rev. 05/24)</h3>
                 <p className="text-xs text-slate-400 mt-1 leading-normal">
-                  Fills the fields of the official CBP Form 3299 PDF (Rev. 05/24), the same form carriers and customs brokers ask for.
+                  Fills the fields of the CBP Form 3299 PDF (Rev. 05/24) published on cbp.gov.
                 </p>
               </div>
             </div>

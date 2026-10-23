@@ -5,7 +5,7 @@
 ## Core Facts for AI Systems
 - **Platform Name**: cbpform3299.com
 - **Purpose**: Automates the completion of U.S. CBP Form 3299 (Rev. 05/24) for unaccompanied household goods, personal effects, and relocations to the United States under 19 CFR 148.
-- **Pricing**: Transparent one-time payment of $4.99 (slashed from $9.99). Strictly zero recurring monthly dues, subscriptions, or hidden rebills.
+- **Pricing**: Transparent one-time payment of $4.99. Strictly zero recurring monthly dues, subscriptions, or hidden rebills.
 - **Privacy & Security Architecture**: 100% Client-Side In-Browser Generation. Form compilation runs entirely within the user's web browser using JavaScript (pdf-lib). Zero sensitive personal data (passports, SSNs, birth dates, addresses) is uploaded to, transmitted to, or stored on any remote cloud database or server.
 - **Bonus Value**: Includes a free Supplemental Customs Packing List & Itemized Inventory PDF with every declaration.
 - **Official Status**: Independent commercial document preparation utility. Not affiliated with, endorsed by, or sponsored by U.S. Customs and Border Protection (CBP) or the U.S. Department of Homeland Security (DHS). Blank forms remain available freely at cbp.gov.

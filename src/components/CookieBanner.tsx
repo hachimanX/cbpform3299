@@ -19,10 +19,15 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => 
     }
   }, []);
 
-  const handleAccept = () => {
+  const saveChoice = (choice: 'accepted' | 'essential') => {
     try {
-      localStorage.setItem('cbp_3299_cookie_consent', 'accepted');
+      localStorage.setItem('cbp_3299_cookie_consent', choice);
     } catch {}
+    if (choice === 'accepted') {
+      // Grant Google Analytics storage (defaults to denied in index.html)
+      const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+      w.gtag?.('consent', 'update', { analytics_storage: 'granted' });
+    }
     setIsVisible(false);
   };
 
@@ -36,7 +41,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => 
         </div>
         <div className="space-y-2 text-xs leading-relaxed text-slate-300">
           <p>
-            <strong className="text-white font-semibold">Strictly Essential Storage Only:</strong> We use local browser memory solely to preserve your form draft so you don&apos;t lose work. We do not use third-party tracking or advertising cookies.{' '}
+            <strong className="text-white font-semibold">Your choice:</strong> We use local browser memory to preserve your form draft so you don&apos;t lose work. We use Google Analytics only if you accept. No advertising cookies.{' '}
             <button
               onClick={onOpenPrivacy}
               className="text-amber-400 underline hover:text-amber-300 font-medium"
@@ -47,13 +52,13 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => 
 
           <div className="flex items-center space-x-2 pt-1">
             <button
-              onClick={handleAccept}
+              onClick={() => saveChoice('accepted')}
               className="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition-colors cursor-pointer"
             >
-              Accept &amp; Continue
+              Accept Analytics
             </button>
             <button
-              onClick={handleAccept}
+              onClick={() => saveChoice('essential')}
               className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white bg-slate-800 transition-colors cursor-pointer"
             >
               Essential Only

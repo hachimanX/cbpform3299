@@ -19,6 +19,8 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+      try { if (localStorage.getItem('cbp_3299_cookie_consent') === 'accepted') { gtag('consent', 'update', { analytics_storage: 'granted' }); } } catch (e) {}
       gtag('js', new Date());
       gtag('config', 'G-53QTDCN8S3');
     </script>
@@ -420,7 +422,7 @@
                 <span class="rev-badge">REV. 05/24</span>
               </div>
               <p class="brand-tagline">
-                Official Declaration for Free Entry of Unaccompanied Articles
+                Independent helper for CBP Form 3299 (Declaration for Free Entry of Unaccompanied Articles)
               </p>
             </div>
           </a>
@@ -457,6 +459,9 @@
         </div>
       </div>
     </header>
+      <div style="background:#fffbeb;color:#0f172a;border-top:1px solid #fde68a;font-size:13px;line-height:1.4;">
+        <p style="max-width:80rem;margin:0 auto;padding:8px 16px;"><strong>Independent service — not a government website.</strong> cbpform3299.com is a private company and is not affiliated with U.S. Customs and Border Protection (CBP) or DHS. You can download the blank CBP Form 3299 free at <a href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf" target="_blank" rel="noreferrer" style="color:#1e40af;text-decoration:underline;font-weight:600;">cbp.gov</a>. We charge $4.99 for our guided fill-in tool and a clean, filled PDF.</p>
+      </div>
 
     <!-- Main Content -->
     <main class="container">
@@ -647,7 +652,7 @@
             </li>
             <li>
               <a href="https://cbpform3299.com/#wizard-section">
-                &rarr; Start Official CBP Form 3299 Generator ($4.99)
+                &rarr; Start the Form 3299 fill-in tool ($4.99)
               </a>
             </li>
           </ul>
@@ -734,8 +739,6 @@
             &copy; 2026 cbpform3299.com. All rights reserved. Built for international movers &amp; relocators.
           </div>
           <div class="footer-badges">
-            <span>WCAG 2.1 AA Compliant</span>
-            <span>•</span>
             <span>256-Bit SSL Encryption</span>
           </div>
         </div>

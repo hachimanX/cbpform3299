@@ -47,7 +47,7 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
                 </span>
               </h3>
               <p className="text-xs text-slate-400">
-                Visual proofreading draft • Official CBP Form 3299
+                Visual proofreading draft • CBP Form 3299 (Rev. 05/24)
               </p>
             </div>
           </div>
@@ -67,7 +67,7 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
           <div className="flex items-center space-x-2">
             <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
             <span>
-              <strong>Proofreading Draft:</strong> All form fields are locked to read-only. Watermarked drafts are rejected by U.S. Customs. Unlock the official clean PDF for submission.
+              <strong>Proofreading Draft:</strong> All form fields are locked to read-only. Not affiliated with CBP. The blank form is free at cbp.gov. $4.99 pays for our fill-in tool.
             </span>
           </div>
           <button
@@ -79,7 +79,7 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
             className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shrink-0 cursor-pointer shadow-xs"
           >
             <CreditCard className="w-3.5 h-3.5" />
-            <span>Unlock Clean Official PDF ($4.99)</span>
+            <span>Download clean PDF ($4.99)</span>
           </button>
         </div>
 
@@ -120,7 +120,7 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
               Ready to submit your declaration to your customs broker or mover?
             </div>
             <div className="text-xs text-slate-400">
-              Get the official print-ready vector PDF without watermarks + Free Packing List for $4.99.
+              Get the print-ready vector PDF without watermarks + Packing List for $4.99.
             </div>
           </div>
 
@@ -141,7 +141,7 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
               className="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl text-sm font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md transition-all cursor-pointer flex items-center justify-center space-x-1.5"
             >
               <CreditCard className="w-4 h-4" />
-              <span>Unlock Official PDF ($4.99) →</span>
+              <span>Download clean PDF ($4.99) →</span>
             </button>
           </div>
         </div>

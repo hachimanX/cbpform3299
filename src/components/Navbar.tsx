@@ -8,6 +8,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onStartGenerator, onOpenLegal }) => {
   return (
+    <>
     <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 text-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -29,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartGenerator, onOpenLegal })
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 hidden sm:block">
-                Official Declaration for Free Entry of Unaccompanied Articles
+                Independent helper for CBP Form 3299 (Declaration for Free Entry of Unaccompanied Articles)
               </p>
             </div>
           </div>
@@ -75,5 +76,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartGenerator, onOpenLegal })
         </div>
       </div>
     </header>
+
+      {/* Non-affiliation disclosure (above the fold on every viewport, scrolls away) */}
+      <div className="bg-amber-50 text-slate-900 border-t border-amber-200 text-[13px] leading-snug">
+        <p className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+          <strong>Independent service — not a government website.</strong> cbpform3299.com is a private company and is not affiliated with U.S. Customs and Border Protection (CBP) or DHS. You can download the blank CBP Form 3299 free at{' '}
+          <a href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf" target="_blank" rel="noreferrer" className="underline font-semibold text-blue-800">cbp.gov</a>. We charge $4.99 for our guided fill-in tool and a clean, filled PDF.
+        </p>
+      </div>
+    </>
   );
 };

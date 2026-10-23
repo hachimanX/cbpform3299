@@ -120,7 +120,7 @@ export const LegalModals: React.FC<LegalModalsProps> = ({ page, onClose, onSelec
 
               <h4 className="font-bold text-slate-900 text-base">3. Tracking & Cookies</h4>
               <p>
-                We do not use invasive third-party tracking scripts, cross-site trackers, or advertising networks. We use only essential functional session storage strictly needed to operate the form wizard.
+                We do not use advertising networks or advertising cookies. We use local browser storage to operate the form wizard. If you click "Accept Analytics" in the cookie banner, we use Google Analytics to measure site traffic; if you choose "Essential Only", no analytics cookies are set.
               </p>
 
               <h4 className="font-bold text-slate-900 text-base">4. Children&apos;s Privacy (COPPA Compliance)</h4>
@@ -251,7 +251,7 @@ export const LegalModals: React.FC<LegalModalsProps> = ({ page, onClose, onSelec
 
         {/* Modal Footer */}
         <div className="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 flex items-center justify-between text-xs text-slate-500">
-          <span>Official website: cbpform3299.com</span>
+          <span>cbpform3299.com (independent service)</span>
           <button
             onClick={onClose}
             className="px-5 py-2 rounded-lg font-bold text-slate-800 bg-slate-200 hover:bg-slate-300 transition-colors cursor-pointer"

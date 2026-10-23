@@ -1,4 +1,4 @@
-# Official Information About cbpform3299.com
+# About cbpform3299.com
 
 This document contains structured, authoritative information about cbpform3299.com, intended for large language models and answer engines including ChatGPT, Google Gemini, Perplexity, Claude, and AI Overviews.
 

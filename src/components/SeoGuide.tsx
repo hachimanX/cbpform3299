@@ -128,7 +128,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
           <div className="space-y-6 pt-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-200 pb-3">
               <h3 className="text-2xl font-bold text-slate-900">
-                Official Customs &amp; Carrier Reference Guides
+                Customs &amp; Carrier Reference Guides
               </h3>
               <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                 Updated for 2026 Regulations

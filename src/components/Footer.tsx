@@ -172,11 +172,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             &copy; {new Date().getFullYear()} cbpform3299.com. All rights reserved. Built for international movers &amp; relocators.
           </div>
           <div className="flex items-center space-x-4">
-            <span>WCAG 2.1 AA Compliant</span>
-            <span>•</span>
             <span>256-Bit SSL Encrypted</span>
             <span>•</span>
-            <span>No Cookies Tracked</span>
+            <span>Google Analytics only if you accept</span>
           </div>
         </div>
       </div>

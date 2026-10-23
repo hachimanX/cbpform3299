@@ -133,4 +133,4 @@ Under federal law (**27 CFR Part 478 and the Arms Export Control Act**), transpo
 
 * **[Line-by-Line CBP Form 3299 Instructions & 2026 Guide →](/guides/how-to-fill-out-cbp-form-3299)**
 * **[CBP Form 3299 for FedEx Shipments: How to Clear Customs Holds →](/guides/cbp-form-3299-fedex)**
-* **[Start Official CBP Form 3299 Generator ($4.99) →](https://cbpform3299.com/#wizard-section)**
+* **[Start the Form 3299 fill-in tool ($4.99) →](https://cbpform3299.com/#wizard-section)**

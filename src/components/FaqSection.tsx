@@ -15,7 +15,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does this generator cost?',
     answer:
-      'You can preview your completed declaration with a watermark 100% free. To export the clean, official high-resolution PDF without watermarks, we charge a one-time fee of $4.99 (slashed from $9.99 for our launch special). There are NEVER any recurring monthly subscriptions or hidden fees.',
+      'You can preview your completed declaration with a watermark 100% free. To export the clean, high-resolution PDF without watermarks, we charge a one-time fee of $4.99. There are NEVER any recurring monthly subscriptions or hidden fees.',
   },
   {
     question: 'Is my personal data or passport number stored on your servers?',

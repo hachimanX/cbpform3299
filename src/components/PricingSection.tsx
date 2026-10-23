@@ -62,7 +62,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
           <div className="p-6 sm:p-8 rounded-2xl border-2 border-amber-400 bg-gradient-to-b from-slate-900 to-slate-950 text-white shadow-xl flex flex-col justify-between space-y-6 relative">
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
               <span className="whitespace-nowrap px-4 py-1 rounded-full text-[11px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 uppercase tracking-wider shadow-sm">
-                Most Popular • 50% Off
+                One-Time Price
               </span>
             </div>
 
@@ -72,7 +72,6 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
               </span>
               <h3 className="text-xl font-extrabold text-white">Complete Declaration Package</h3>
               <div className="flex items-baseline space-x-2">
-                <span className="text-slate-400 line-through text-lg font-bold">$9.99</span>
                 <span className="text-3xl sm:text-4xl font-extrabold text-amber-400">$4.99</span>
                 <span className="text-xs text-slate-300">one-time</span>
               </div>
@@ -81,6 +80,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Single payment • No subscription ever</span>
               </div>
+
+              <p className="text-[12px] text-slate-300 leading-relaxed">
+                Not affiliated with CBP. The blank form is free at{' '}
+                <a href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf" target="_blank" rel="noreferrer" className="underline text-amber-300">cbp.gov</a>. $4.99 pays for our fill-in tool.
+              </p>
 
               <ul className="text-xs text-slate-300 space-y-2.5 pt-1">
                 <li className="flex items-center space-x-2">

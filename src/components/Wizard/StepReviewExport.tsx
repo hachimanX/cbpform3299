@@ -32,7 +32,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
   onPrev,
   onOpenLegal,
 }) => {
-  const [hasReviewedConsent, setHasReviewedConsent] = useState(true);
+  const [hasReviewedConsent, setHasReviewedConsent] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [previewBlobUrl, setPreviewBlobUrl] = useState<string | null>(null);
   const [previewPdfBytes, setPreviewPdfBytes] = useState<Uint8Array | null>(null);
@@ -113,18 +113,14 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
     }
   };
 
-  // Download Clean Official PDF (Post-Purchase / Test Unlock)
+  // Download Clean PDF (Post-Purchase). Consent was already given before checkout,
+  // and the page reloads on return from Stripe, so it is not re-checked here.
   const handleDownloadClean = async () => {
-    if (!hasReviewedConsent) {
-      alert('Please check the verification agreement before downloading.');
-      return;
-    }
-
     try {
       setIsGeneratingClean(true);
       setErrorMessage(null);
       const pdfBytes = await generateCBPForm3299(data, { isWatermarked: false });
-      downloadPdf(pdfBytes, `CBP_Form_3299_OFFICIAL_${data.lastName || 'DECLARATION'}.pdf`);
+      downloadPdf(pdfBytes, `CBP_Form_3299_${data.lastName || 'DECLARATION'}.pdf`);
       setUnlockedPurchased(true);
     } catch (err: any) {
       console.error(err);
@@ -398,18 +394,10 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
           </div>
         </div>
 
-        {/* Card 2: Official Clean Document Unlock ($4.99 via Stripe) */}
+        {/* Card 2: Clean Document Unlock ($4.99 via Stripe) */}
         <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-7 rounded-2xl border-2 border-amber-400/80 shadow-xl text-white flex flex-col justify-between space-y-5 relative overflow-hidden">
-          {/* Badge */}
-          <div className="absolute top-4 right-4 z-10">
-            <span className="whitespace-nowrap px-3 py-1 rounded-full text-[11px] font-extrabold bg-amber-400 text-slate-950 uppercase tracking-wide shadow-sm">
-              Launch Deal • 50% Off
-            </span>
-          </div>
-
           <div className="space-y-3">
             <div className="flex items-baseline space-x-2.5">
-              <span className="text-slate-400 line-through text-lg font-bold">$9.99</span>
               <span className="text-3xl font-extrabold text-amber-400">$4.99</span>
               <span className="text-xs text-slate-400">One-time payment</span>
             </div>
@@ -419,7 +407,12 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
             </h4>
 
             <p className="text-xs text-slate-300 leading-relaxed">
-              Export the clean, watermark-free, print-ready official vector PDF accepted by all ocean/air carriers, plus our bonus Customs Packing Inventory.
+              Export the clean, watermark-free, print-ready vector PDF, plus our bonus Customs Packing Inventory.
+            </p>
+
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Not affiliated with CBP. The blank form is free at{' '}
+              <a href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf" target="_blank" rel="noreferrer" className="underline text-amber-300">cbp.gov</a>. $4.99 pays for our fill-in tool.
             </p>
 
             <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/80 text-[11px] text-emerald-400 flex items-center space-x-2">
@@ -432,11 +425,11 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
             <ul className="text-xs text-slate-300 space-y-2 pt-1">
               <li className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Clean, high-resolution official vector PDF (Zero Watermark)</span>
+                <span>Clean, high-resolution vector PDF (Zero Watermark)</span>
               </li>
               <li className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>FREE Supplemental Packing List PDF included ($19 value)</span>
+                <span>Supplemental Packing List PDF included</span>
               </li>
               <li className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
