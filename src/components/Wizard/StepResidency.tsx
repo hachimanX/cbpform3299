@@ -119,13 +119,14 @@ export const StepResidency: React.FC<StepResidencyProps> = ({ data, updateData, 
         <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-4">
             <div className="sm:col-span-6">
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label htmlFor="residency-field-1" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                 {data.residencyStatus === 'returning_resident'
                   ? 'Country You Resided In Abroad'
                   : 'Country of Citizenship / Foreign Residency'}{' '}
                 <span className="text-red-500">*</span>
               </label>
               <input
+                  id="residency-field-1"
                 type="text"
                 required
                 placeholder="e.g. United Kingdom, Germany, Canada"
@@ -138,10 +139,11 @@ export const StepResidency: React.FC<StepResidencyProps> = ({ data, updateData, 
             {data.residencyStatus === 'returning_resident' && (
               <>
                 <div className="sm:col-span-3">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  <label htmlFor="residency-field-2" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                     Length of Stay (Years)
                   </label>
                   <input
+                  id="residency-field-2"
                     type="number"
                     min="0"
                     placeholder="e.g. 2"
@@ -151,10 +153,11 @@ export const StepResidency: React.FC<StepResidencyProps> = ({ data, updateData, 
                   />
                 </div>
                 <div className="sm:col-span-3">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  <label htmlFor="residency-field-3" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                     Length of Stay (Months)
                   </label>
                   <input
+                  id="residency-field-3"
                     type="number"
                     min="0"
                     max="11"
@@ -185,16 +188,17 @@ export const StepResidency: React.FC<StepResidencyProps> = ({ data, updateData, 
               Part III: U.S. Government / Military Personnel / Evacuee (Optional)
             </label>
           </div>
-          <span className="text-[11px] text-slate-400">Leave unchecked if civilian</span>
+          <span className="text-xs text-slate-600">Leave unchecked if civilian</span>
         </div>
 
         {data.isUsPersonnelOrEvacuee && (
           <div className="pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label htmlFor="residency-field-4" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                 Date of Departure Abroad
               </label>
               <input
+                  id="residency-field-4"
                 type="date"
                 value={data.dateOfDepartureAbroad}
                 onChange={(e) => updateData({ dateOfDepartureAbroad: e.target.value })}
@@ -202,10 +206,11 @@ export const StepResidency: React.FC<StepResidencyProps> = ({ data, updateData, 
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label htmlFor="residency-field-5" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                 Date Official Orders Issued
               </label>
               <input
+                  id="residency-field-5"
                 type="date"
                 value={data.dateOrdersIssued}
                 onChange={(e) => updateData({ dateOrdersIssued: e.target.value })}

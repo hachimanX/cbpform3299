@@ -238,10 +238,11 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
 
         {data.certificationRole === 'authorized_agent' && (
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="reviewexport-field-1" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Agent / Firm Name to Print
             </label>
             <input
+                  id="reviewexport-field-1"
               type="text"
               placeholder="e.g. Allied International Logistics LLC"
               value={data.agentNamePrint || ''}
@@ -253,10 +254,11 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
 
         {/* Date of Signature */}
         <div className="w-full sm:w-64">
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+          <label htmlFor="reviewexport-field-2" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
             Declaration Signature Date
           </label>
           <input
+                  id="reviewexport-field-2"
             type="date"
             value={data.signatureDate}
             onChange={(e) => updateData({ signatureDate: e.target.value })}
@@ -425,7 +427,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
               <a href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf" target="_blank" rel="noreferrer" className="underline text-amber-300">cbp.gov</a>. $4.99 pays for our fill-in tool.
             </p>
 
-            <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/80 text-[11px] text-emerald-400 flex items-center space-x-2">
+            <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/80 text-xs text-emerald-400 flex items-center space-x-2">
               <ShieldCheck className="w-4 h-4 shrink-0 text-emerald-400" />
               <span>
                 <strong>100% Never a Subscription:</strong> Pay $4.99 once. No hidden fees or recurring rebills.
@@ -487,7 +489,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
               <button
                 type="button"
                 onClick={() => onOpenLegal('refund')}
-                className="text-[11px] text-slate-400 hover:text-slate-200 underline cursor-pointer"
+                className="text-xs text-slate-400 hover:text-slate-200 underline cursor-pointer"
               >
                 14-Day Guarantee Terms &amp; Carrier Rejection Policy
               </button>

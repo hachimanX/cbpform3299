@@ -11,7 +11,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
     <section className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white pt-12 pb-20 border-b border-slate-800">
       {/* Background Subtle Grid / Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(59,130,246,0.15),rgba(255,255,255,0))] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,100vw)] h-[600px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-6">
@@ -58,25 +58,34 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <button
-              onClick={onStart}
+            <a
+              href="#wizard-section"
+              onClick={(e) => {
+                e.preventDefault();
+                onStart();
+              }}
               className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-8 py-4 rounded-xl text-base font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-400 to-yellow-400 hover:from-amber-300 hover:to-amber-400 shadow-xl hover:shadow-amber-400/20 transition-all transform hover:-translate-y-0.5 cursor-pointer"
             >
               <Sparkles className="w-5 h-5 text-slate-950" />
               <span>Start Interactive Wizard</span>
               <ArrowRight className="w-5 h-5 text-slate-950" />
-            </button>
+            </a>
 
-            <button
-              onClick={onScrollToGuide}
+            <a
+              href="#seo-guide"
+              onClick={(e) => {
+                e.preventDefault();
+                onScrollToGuide();
+              }}
               className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-4 rounded-xl text-base font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 transition-all cursor-pointer"
             >
               <FileCheck className="w-5 h-5 text-amber-400" />
               <span>Read 2026 Form Instructions</span>
-            </button>
+            </a>
           </div>
 
           {/* 3 Core Trust Badges */}
+          <h2 className="sr-only">Why use this tool</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-10 text-left">
             {/* Card 1: Privacy */}
             <div className="p-4 rounded-xl bg-slate-800/40 border border-slate-700/60 flex items-start space-x-3.5">

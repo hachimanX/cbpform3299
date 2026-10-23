@@ -32,10 +32,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
 
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-4">
           <div className="sm:col-span-5">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-1" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Last Name / Surname <span className="text-red-500">*</span>
             </label>
             <input
+                  id="personal-field-1"
               type="text"
               required
               placeholder="e.g. SMITH"
@@ -46,10 +47,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-5">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-2" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               First Name <span className="text-red-500">*</span>
             </label>
             <input
+                  id="personal-field-2"
               type="text"
               required
               placeholder="e.g. JOHN"
@@ -60,10 +62,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-3" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Middle Initial
             </label>
             <input
+                  id="personal-field-3"
               type="text"
               maxLength={2}
               placeholder="e.g. M"
@@ -74,11 +77,12 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-dob" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Date of Birth <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <input
+                id="personal-field-dob"
                 type="date"
                 required
                 value={data.dateOfBirth}
@@ -89,10 +93,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-4" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Date of Your Arrival in the U.S. <span className="text-red-500">*</span>
             </label>
             <input
+                  id="personal-field-4"
               type="date"
               required
               value={data.dateOfArrival}
@@ -102,10 +107,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-12">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-5" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               U.S. Address (Where goods are being delivered) <span className="text-red-500">*</span>
             </label>
             <input
+                  id="personal-field-5"
               type="text"
               required
               placeholder="e.g. 742 Evergreen Terrace, Springfield, OR 97477"
@@ -113,16 +119,17 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
               onChange={(e) => updateData({ usAddress: e.target.value })}
               className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-sm font-medium text-slate-900 outline-none transition-all"
             />
-            <p className="text-[11px] text-slate-500 mt-1">
+            <p className="text-xs text-slate-600 mt-1">
               If temporary, provide hotel or company relocation address where you can be contacted.
             </p>
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-6" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Port of Arrival in U.S. <span className="text-red-500">*</span>
             </label>
             <input
+                  id="personal-field-6"
               type="text"
               required
               placeholder="e.g. JFK Airport, NY or Los Angeles, CA"
@@ -133,10 +140,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-7" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Arriving Airline &amp; Flight # or Vessel Name <span className="text-red-500">*</span>
             </label>
             <input
+                  id="personal-field-7"
               type="text"
               required
               placeholder="e.g. British Airways Flight 177"
@@ -147,17 +155,18 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-12">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-8" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Accompanying Household Members (Names &amp; Relationship)
             </label>
             <input
+                  id="personal-field-8"
               type="text"
               placeholder="e.g. Jane Smith (Spouse), Tommy Smith (Child)"
               value={data.householdMembers}
               onChange={(e) => updateData({ householdMembers: e.target.value })}
               className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-sm font-medium text-slate-900 outline-none transition-all"
             />
-            <p className="text-[11px] text-slate-500 mt-1">
+            <p className="text-xs text-slate-600 mt-1">
               List family members traveling with you whose belongings are in the shipment.
             </p>
           </div>
@@ -180,10 +189,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
 
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-4">
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-9" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Estimated Arrival Date of Goods
             </label>
             <input
+                  id="personal-field-9"
               type="date"
               value={data.belongingsArrivalDate}
               onChange={(e) => updateData({ belongingsArrivalDate: e.target.value })}
@@ -192,10 +202,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-10" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Moving / Freight Carrier Name
             </label>
             <input
+                  id="personal-field-10"
               type="text"
               placeholder="e.g. Allied Van Lines, Schumacher, MSC"
               value={data.carrierName}
@@ -205,10 +216,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-11" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Shipped From Country
             </label>
             <input
+                  id="personal-field-11"
               type="text"
               placeholder="e.g. United Kingdom, Germany, Japan"
               value={data.fromCountry}
@@ -218,10 +230,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-12" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Bill of Lading (B/L) or Air Waybill (AWB) #
             </label>
             <input
+                  id="personal-field-12"
               type="text"
               placeholder="e.g. MAEU987654321 or Pending"
               value={data.billOfLadingOrAwb}
@@ -231,10 +244,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-13" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Number &amp; Type of Packages
             </label>
             <input
+                  id="personal-field-13"
               type="text"
               placeholder="e.g. 1 x 20ft Container, 25 Cartons"
               value={data.numberOfContainers}
@@ -244,10 +258,11 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ data, updateData, on
           </div>
 
           <div className="sm:col-span-6">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label htmlFor="personal-field-14" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
               Marks &amp; Numbers
             </label>
             <input
+                  id="personal-field-14"
               type="text"
               placeholder="e.g. As Addressed or Container # MSKU123456"
               value={data.marksAndNumbers}

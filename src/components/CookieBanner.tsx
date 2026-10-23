@@ -34,14 +34,14 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 bg-slate-900/95 backdrop-blur-md text-white p-4 sm:p-5 rounded-2xl border border-slate-700 shadow-2xl animate-fade-in">
+    <div className="fixed bottom-0 left-0 right-0 sm:bottom-4 sm:left-auto sm:right-6 sm:max-w-md z-40 bg-slate-900/95 backdrop-blur-md text-white px-4 py-3 sm:p-5 sm:rounded-2xl border-t sm:border border-slate-700 shadow-2xl animate-fade-in">
       <div className="flex items-start space-x-3.5">
-        <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 shrink-0 mt-0.5">
+        <div className="hidden sm:block p-2 rounded-xl bg-amber-500/10 text-amber-400 shrink-0 mt-0.5">
           <Cookie className="w-5 h-5" />
         </div>
         <div className="space-y-2 text-xs leading-relaxed text-slate-300">
           <p>
-            <strong className="text-white font-semibold">Your choice:</strong> We use local browser memory to preserve your form draft so you don&apos;t lose work. We use Google Analytics only if you accept. No advertising cookies.{' '}
+            We use Google Analytics only if you accept. No advertising cookies. Your form draft stays in your browser.{' '}
             <button
               onClick={onOpenPrivacy}
               className="text-amber-400 underline hover:text-amber-300 font-medium"

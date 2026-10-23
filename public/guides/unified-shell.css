@@ -366,3 +366,8 @@
   align-items: center;
   gap: 12px;
 }
+
+/* Mobile: keep header within 390px (hide secondary brand bits) */
+@media (max-width: 639px) {
+  header .brand-title-sub, header .rev-badge { display: none; }
+}

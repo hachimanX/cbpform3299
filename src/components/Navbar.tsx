@@ -24,12 +24,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartGenerator, onOpenLegal })
                 <span className="font-extrabold text-xl tracking-tight text-white">
                   CBP<span className="text-amber-400">3299</span>
                 </span>
-                <span className="text-xs uppercase tracking-wider font-semibold text-slate-400">Generator</span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                <span className="hidden sm:inline text-xs uppercase tracking-wider font-semibold text-slate-400">Generator</span>
+                <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
                   REV. 05/24
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 hidden sm:block">
+              <p className="text-xs text-slate-400 hidden sm:block">
                 Independent helper for CBP Form 3299 (Declaration for Free Entry of Unaccompanied Articles)
               </p>
             </div>
@@ -62,16 +62,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartGenerator, onOpenLegal })
 
           {/* Primary Action */}
           <div className="flex items-center space-x-3">
-            <button
-              onClick={onStartGenerator}
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg text-sm font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md hover:shadow-amber-500/20 transition-all transform active:scale-95 cursor-pointer"
+            <a
+              href="#wizard-section"
+              onClick={(e) => {
+                e.preventDefault();
+                onStartGenerator();
+              }}
+              className="inline-flex items-center space-x-2 px-3 sm:px-5 py-2.5 rounded-lg whitespace-nowrap text-sm font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md hover:shadow-amber-500/20 transition-all transform active:scale-95 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-slate-950" />
-              <span>Start Generator</span>
+              <span>Start<span className="hidden sm:inline"> Generator</span></span>
               <span className="hidden sm:inline bg-slate-950 text-amber-400 text-xs px-1.5 py-0.5 rounded font-extrabold ml-1">
                 $4.99
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

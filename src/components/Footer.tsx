@@ -45,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
 
           {/* Quick Legal Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">Legal &amp; Policies</h4>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-200">Legal &amp; Policies</h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <button
@@ -92,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
 
           {/* Customs Resources */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">Resources</h4>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-200">Resources</h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <a href="#wizard-section" className="hover:text-amber-400 transition-colors">
@@ -150,7 +150,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         </div>
 
         {/* Mandatory Federal Disclaimer Box */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 text-[11px] text-slate-400 leading-relaxed space-y-2">
+        <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-300 leading-relaxed space-y-2">
           <p className="font-bold text-slate-300">
             DISCLAIMER OF GOVERNMENT AFFILIATION &amp; LEGAL NOTICE:
           </p>
@@ -167,7 +167,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         </div>
 
         {/* Bottom Credits & Copyright */}
-        <div className="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
             &copy; {new Date().getFullYear()} cbpform3299.com. All rights reserved. Built for international movers &amp; relocators.
           </div>

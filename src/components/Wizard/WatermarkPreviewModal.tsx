@@ -41,7 +41,7 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
             <div>
               <h3 className="font-bold text-base sm:text-lg text-white flex items-center space-x-2">
                 <span>Uneditable Watermarked Preview</span>
-                <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-amber-300 font-semibold flex items-center space-x-1">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-amber-300 font-semibold flex items-center space-x-1">
                   <Lock className="w-3 h-3" />
                   <span>Fields Locked (Read-Only)</span>
                 </span>

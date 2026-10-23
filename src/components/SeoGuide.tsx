@@ -140,7 +140,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
                 href="/guides/how-to-fill-out-cbp-form-3299/"
                 className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-amber-400 hover:shadow-md transition-all space-y-2.5 block"
               >
-                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold">
+                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-xs font-bold">
                   <span>Pillar Guide</span>
                 </div>
                 <h4 className="font-bold text-slate-950 text-sm group-hover:text-blue-600 transition-colors">
@@ -155,7 +155,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
                 href="/guides/cbp-form-3299-fedex/"
                 className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-amber-400 hover:shadow-md transition-all space-y-2.5 block"
               >
-                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">
+                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">
                   <span>Express Carrier</span>
                 </div>
                 <h4 className="font-bold text-slate-950 text-sm group-hover:text-blue-600 transition-colors">
@@ -170,7 +170,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
                 href="/guides/cbp-form-3299-supplemental-declaration/"
                 className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-amber-400 hover:shadow-md transition-all space-y-2.5 block"
               >
-                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
                   <span>Packing List</span>
                 </div>
                 <h4 className="font-bold text-slate-950 text-sm group-hover:text-blue-600 transition-colors">

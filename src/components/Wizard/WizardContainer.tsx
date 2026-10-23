@@ -112,7 +112,7 @@ export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal })
                     ? 'border-blue-600 bg-blue-50/70 shadow-sm'
                     : isCompleted
                     ? 'border-slate-200 bg-white cursor-pointer hover:bg-slate-50'
-                    : 'border-slate-200 bg-slate-50 opacity-60'
+                    : 'border-slate-200 bg-slate-50'
                 }`}
               >
                 <div
@@ -127,7 +127,7 @@ export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal })
                   {isCompleted ? <Check className="w-4 h-4" /> : <Icon className="w-4 h-4" />}
                 </div>
                 <div className="overflow-hidden">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-600">
                     Step {s.num}
                   </div>
                   <div className="text-xs font-bold text-slate-900 truncate">{s.title}</div>

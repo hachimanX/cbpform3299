@@ -61,7 +61,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
           {/* OUR TOOL (Hero Card) */}
           <div className="p-6 sm:p-8 rounded-2xl border-2 border-amber-400 bg-gradient-to-b from-slate-900 to-slate-950 text-white shadow-xl flex flex-col justify-between space-y-6 relative">
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
-              <span className="whitespace-nowrap px-4 py-1 rounded-full text-[11px] font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 uppercase tracking-wider shadow-sm">
+              <span className="whitespace-nowrap px-4 py-1 rounded-full text-xs font-extrabold bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 uppercase tracking-wider shadow-sm">
                 One-Time Price
               </span>
             </div>
@@ -76,7 +76,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
                 <span className="text-xs text-slate-300">one-time</span>
               </div>
 
-              <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700 text-[11px] text-emerald-400 font-semibold flex items-center space-x-1.5">
+              <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700 text-xs text-emerald-400 font-semibold flex items-center space-x-1.5">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Single payment • No subscription ever</span>
               </div>

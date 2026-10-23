@@ -232,8 +232,9 @@ export const StepArticles: React.FC<StepArticlesProps> = ({ data, updateData, on
               className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center"
             >
               <div className="sm:col-span-1">
-                <label className="block text-[10px] font-bold text-slate-500 uppercase sm:hidden mb-1">Item #</label>
+                <label htmlFor={`articles-row-${index}-1`} className="block text-xs font-bold text-slate-600 uppercase sm:hidden mb-1">Item #</label>
                 <input
+                  id={`articles-row-${index}-1`}
                   type="text"
                   value={item.itemNumber}
                   onChange={(e) => updateItemRow(index, 'itemNumber', e.target.value)}
@@ -243,8 +244,9 @@ export const StepArticles: React.FC<StepArticlesProps> = ({ data, updateData, on
               </div>
 
               <div className="sm:col-span-5">
-                <label className="block text-[10px] font-bold text-slate-500 uppercase sm:hidden mb-1">Description</label>
+                <label htmlFor={`articles-row-${index}-2`} className="block text-xs font-bold text-slate-600 uppercase sm:hidden mb-1">Description</label>
                 <input
+                  id={`articles-row-${index}-2`}
                   type="text"
                   value={item.description}
                   onChange={(e) => updateItemRow(index, 'description', e.target.value)}
@@ -255,8 +257,9 @@ export const StepArticles: React.FC<StepArticlesProps> = ({ data, updateData, on
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-[10px] font-bold text-slate-500 uppercase sm:hidden mb-1">Est. Value (USD)</label>
+                <label htmlFor={`articles-row-${index}-3`} className="block text-xs font-bold text-slate-600 uppercase sm:hidden mb-1">Est. Value (USD)</label>
                 <input
+                  id={`articles-row-${index}-3`}
                   type="text"
                   value={item.value}
                   onChange={(e) => updateItemRow(index, 'value', e.target.value)}
@@ -266,8 +269,9 @@ export const StepArticles: React.FC<StepArticlesProps> = ({ data, updateData, on
               </div>
 
               <div className="sm:col-span-3">
-                <label className="block text-[10px] font-bold text-slate-500 uppercase sm:hidden mb-1">Where &amp; Date Acquired</label>
+                <label htmlFor={`articles-row-${index}-4`} className="block text-xs font-bold text-slate-600 uppercase sm:hidden mb-1">Where &amp; Date Acquired</label>
                 <input
+                  id={`articles-row-${index}-4`}
                   type="text"
                   value={item.placeAcquiredDate}
                   onChange={(e) => updateItemRow(index, 'placeAcquiredDate', e.target.value)}
