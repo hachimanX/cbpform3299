@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import type { CBPFormData } from '../../types/form';
-import { generateCBPForm3299, downloadPdf } from '../../lib/pdfGenerator';
-import { generatePackingListPdf } from '../../lib/packingListGenerator';
 import { WatermarkPreviewModal } from './WatermarkPreviewModal';
 import { 
   FileCheck, 
@@ -15,7 +13,10 @@ import {
   Eye,
   Lock
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
+
+// pdf-lib and canvas-confetti are loaded on demand to keep the main bundle small
+const loadPdfGenerator = () => import('../../lib/pdfGenerator');
+const loadPackingListGenerator = () => import('../../lib/packingListGenerator');
 
 const STRIPE_CHECKOUT_URL = 'https://buy.stripe.com/6oU4gz2Y278m8wn667bZe01';
 
@@ -50,14 +51,16 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
       setUnlockedPurchased(true);
 
       // Trigger celebration confetti
-      try {
-        confetti({
-          particleCount: 120,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#f59e0b', '#3b82f6', '#10b981'],
-        });
-      } catch {}
+      import('canvas-confetti')
+        .then(({ default: confetti }) =>
+          confetti({
+            particleCount: 120,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#f59e0b', '#3b82f6', '#10b981'],
+          }),
+        )
+        .catch(() => {});
 
       // Auto-trigger clean download
       handleDownloadClean();
@@ -75,6 +78,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
         return;
       }
 
+      const { generateCBPForm3299 } = await loadPdfGenerator();
       const pdfBytes = await generateCBPForm3299(data, { isWatermarked: true });
       const buffer = pdfBytes.buffer.slice(pdfBytes.byteOffset, pdfBytes.byteOffset + pdfBytes.byteLength) as ArrayBuffer;
       const blob = new Blob([buffer], { type: 'application/pdf' });
@@ -97,6 +101,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
       setIsGeneratingPreview(true);
       setErrorMessage(null);
 
+      const { generateCBPForm3299, downloadPdf } = await loadPdfGenerator();
       let bytes = previewPdfBytes;
       if (!bytes) {
         bytes = await generateCBPForm3299(data, { isWatermarked: true });
@@ -119,6 +124,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
     try {
       setIsGeneratingClean(true);
       setErrorMessage(null);
+      const { generateCBPForm3299, downloadPdf } = await loadPdfGenerator();
       const pdfBytes = await generateCBPForm3299(data, { isWatermarked: false });
       downloadPdf(pdfBytes, `CBP_Form_3299_${data.lastName || 'DECLARATION'}.pdf`);
       setUnlockedPurchased(true);
@@ -149,6 +155,10 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
   const handleDownloadPackingList = async () => {
     try {
       setIsGeneratingPacking(true);
+      const [{ generatePackingListPdf }, { downloadPdf }] = await Promise.all([
+        loadPackingListGenerator(),
+        loadPdfGenerator(),
+      ]);
       const packingBytes = await generatePackingListPdf(data);
       downloadPdf(packingBytes, `CBP_3299_Supplemental_Packing_List_${data.lastName || 'DECLARATION'}.pdf`);
     } catch (err: any) {

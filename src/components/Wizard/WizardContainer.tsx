@@ -15,22 +15,28 @@ const STORAGE_KEY = 'cbp_3299_form_draft_v1';
 
 export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal }) => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<CBPFormData>(() => {
+  // Start from the defaults so the pre-rendered HTML matches; the saved draft is restored after mount
+  const [formData, setFormData] = useState<CBPFormData>(initialFormData);
+  const [draftRestored, setDraftRestored] = useState(false);
+
+  // Restore saved draft (must run before the Stripe-return check below)
+  useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        return JSON.parse(saved);
+        setFormData(JSON.parse(saved));
       }
     } catch {}
-    return initialFormData;
-  });
+    setDraftRestored(true);
+  }, []);
 
-  // Save changes locally
+  // Save changes locally (skipped until the draft is restored so defaults never overwrite it)
   useEffect(() => {
+    if (!draftRestored) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
     } catch {}
-  }, [formData]);
+  }, [formData, draftRestored]);
 
   // Check for return from Stripe payment
   useEffect(() => {

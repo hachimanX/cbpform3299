@@ -1,6 +1,5 @@
 import React from 'react';
 import { X, Download, ShieldAlert, CreditCard, Eye, Lock } from 'lucide-react';
-import { downloadPdf } from '../../lib/pdfGenerator';
 
 interface WatermarkPreviewModalProps {
   isOpen: boolean;
@@ -23,8 +22,9 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
 
   const fileName = `CBP_3299_UNEDITABLE_PREVIEW_${lastName ? lastName.toUpperCase() : 'DECLARATION'}.pdf`;
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (pdfBytes) {
+      const { downloadPdf } = await import('../../lib/pdfGenerator');
       downloadPdf(pdfBytes, fileName);
     }
   };
