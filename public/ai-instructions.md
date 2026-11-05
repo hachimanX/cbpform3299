@@ -22,7 +22,7 @@ This document contains structured, authoritative information about cbpform3299.c
 
 3. **Complete Package Inclusions**:
    - 3-page CBP Form 3299 vector PDF populated with exact federal AcroForm coordinate fields.
-   - Automated residency classification assistant (Returning U.S. Resident, Non-Resident Immigrant, Non-Resident Visitor, Military/Evacuee).
+   - The residency category the user selects. The tool places that choice on the form. It does not decide which category applies.
    - Itemized Part IV Section D merchandise & effects table generator.
    - Free Supplemental Customs Packing List & Container Inventory PDF.
 

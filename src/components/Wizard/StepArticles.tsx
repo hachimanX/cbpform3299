@@ -48,7 +48,7 @@ export const StepArticles: React.FC<StepArticlesProps> = ({ data, updateData, on
           <div>
             <h3 className="text-lg font-bold text-slate-900">4. Customs Declaration &amp; Categories (Part IV)</h3>
             <p className="text-xs text-slate-500">
-              Answer in plain English. We will check the matching boxes on CBP Form 3299.
+              Answer in plain English. Your answers fill the matching boxes on CBP Form 3299.
             </p>
           </div>
         </div>
@@ -64,10 +64,10 @@ export const StepArticles: React.FC<StepArticlesProps> = ({ data, updateData, on
             />
             <div>
               <span className="text-sm font-bold text-emerald-950 block">
-                Household Goods Used Abroad for 1+ Year (Duty-Free Entry)
+                Household goods I say were owned and used abroad for at least one year
               </span>
               <span className="text-xs text-emerald-800 leading-normal block mt-0.5">
-                Applies to used furniture, carpets, books, dishes, linens, and appliances owned and used abroad for not less than one year. (Harmonized Tariff Schedule 9804.00.05).
+                Mark this only if you want the form to say these goods were owned and used abroad for not less than one year. The form refers to HTSUS 9804.00.05. The tool does not decide whether that rule applies.
               </span>
             </div>
           </label>

@@ -19,7 +19,7 @@ export interface CBPFormData {
   marksAndNumbers: string;
 
   // PART II - Status of Arriving Person
-  residencyStatus: 'returning_resident' | 'emigrating' | 'visiting';
+  residencyStatus: '' | 'returning_resident' | 'emigrating' | 'visiting';
   countryOfResidency: string;
   lengthOfStayYears: string;
   lengthOfStayMonths: string;
@@ -84,7 +84,7 @@ export const initialFormData: CBPFormData = {
   numberOfContainers: '',
   marksAndNumbers: '',
 
-  residencyStatus: 'returning_resident',
+  residencyStatus: '',
   countryOfResidency: '',
   lengthOfStayYears: '',
   lengthOfStayMonths: '',
@@ -93,8 +93,8 @@ export const initialFormData: CBPFormData = {
   dateOfDepartureAbroad: '',
   dateOrdersIssued: '',
 
-  allPersonalEffectsTakenAbroad: true,
-  listOfArticlesAttached: true,
+  allPersonalEffectsTakenAbroad: false,
+  listOfArticlesAttached: false,
   articlesAcquiredAbroadResident: false,
 
   nonresidentPersonalEffects: false,
@@ -107,14 +107,12 @@ export const initialFormData: CBPFormData = {
   fruitsPlantsMeatsBirds: false,
   fishWildlifeProducts: false,
   householdEffectsUnder1Year: false,
-  householdEffectsOver1Year: true,
+  householdEffectsOver1Year: false,
   personalEffectsAcquiredAbroad: false,
   foreignArticlesAcquiredInUS: false,
   articlesRepairedAbroad: false,
 
-  itemizedArticles: [
-    { itemNumber: '1', description: 'Used Household Goods & Personal Effects (Owned > 1 Yr)', value: 'N/A', placeAcquiredDate: 'Abroad / Various' }
-  ],
+  itemizedArticles: [],
 
   certificationRole: 'importer',
   signatureDate: new Date().toISOString().split('T')[0],

@@ -26,7 +26,7 @@ const faqs: FaqItem[] = [
   {
     question: 'What qualifies as duty-free household goods?',
     answer:
-      'Under Harmonized Tariff Schedule subheading 9804.00.05, household effects (such as furniture, carpets, paintings, tableware, books, and linens) that have been owned and used abroad by you or your family for not less than one full year enter the United States completely duty-free.',
+      'The written tariff rule, HTSUS 9804.00.05, describes household effects (such as furniture, carpets, paintings, tableware, books, and linens) that have been owned and used abroad by you or your family for not less than one full year. The tool does not decide whether that rule applies to your goods.',
   },
   {
     question: 'Can I include wine or alcohol in my shipment?',

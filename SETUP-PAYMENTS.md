@@ -13,18 +13,20 @@ DNS for `cbpform3299.com` is already at Cloudflare, but the website itself is no
 - One secret, one command to deploy, no server to keep running.
 - Do not turn on Cloudflare's proxy (orange cloud) for the apex just to host this function. That would put GitHub Pages behind Cloudflare and can break the certificate. Leave the website where it is.
 
-## 1. Seller name and email
+## 1. Seller name, email, postal address, and governing law
 
 Edit `site.config.json` only:
 
 ```json
 {
   "sellerName": "the name you want on the about, terms, and refund pages",
-  "sellerEmail": "the inbox you will read"
+  "sellerEmail": "the inbox you will read",
+  "sellerAddress": "the business postal address",
+  "governingLaw": "the law that governs the terms"
 }
 ```
 
-The pages currently show the placeholders `{{SELLER_NAME}}` and `{{SELLER_CONTACT_EMAIL}}`. The site used to display `support@cbpform3299.com`. Use that mailbox only if it is really yours.
+The pages currently show `{{SELLER_NAME}}`, `{{SELLER_CONTACT_EMAIL}}`, `{{SELLER_ADDRESS}}`, and `{{GOVERNING_LAW}}`. The site used to display `support@cbpform3299.com`. Use that mailbox only if it is really yours. Do not invent a city in the surrounding sentences. Put the postal address only in `sellerAddress`.
 
 Rebuild and deploy the site after you change the file (merging this branch does that deploy via GitHub Actions). The placeholders are filled at build time.
 

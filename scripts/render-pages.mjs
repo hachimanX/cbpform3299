@@ -4,6 +4,8 @@ import { dirname, resolve } from 'node:path';
 const config = JSON.parse(readFileSync(resolve('site.config.json'), 'utf8'));
 const seller = config.sellerName;
 const email = config.sellerEmail;
+const address = config.sellerAddress;
+const governingLaw = config.governingLaw;
 const origin = 'https://cbpform3299.com';
 const blankForm = 'https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf';
 
@@ -59,7 +61,7 @@ function page({ slug, title, description, body }) {
       <li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li>
       <li><a href="${blankForm}">Blank form (free at CBP.gov)</a></li>
     </ul>
-    <p>Seller: ${seller}. Email: <a href="mailto:${email}">${email}</a>.</p>
+    <p>Seller: ${seller}. Postal address: ${address}. Email: <a href="mailto:${email}">${email}</a>.</p>
   </footer>
 <script src="/consent.js" defer></script>
 </body>
@@ -79,9 +81,10 @@ const pages = [
     <p>This site charges $4.99 once for a guided questionnaire and a clean, filled PDF. You can preview a watermarked copy before you pay.</p>
     <h2 id="notice">Not affiliated with U.S. Customs and Border Protection</h2>
     <p class="note">cbpform3299.com is an independent document preparation service and is not affiliated with, sponsored by, endorsed by, or authorized by U.S. Customs and Border Protection (CBP), the U.S. Department of Homeland Security (DHS), or the United States Government. Blank CBP forms and filing instructions are free at <a href="https://www.cbp.gov">cbp.gov</a>.</p>
+    <p>You choose every answer. The tool only places your answers on the form. It does not decide whether you qualify for anything, and it does not choose a category for you.</p>
     <p>This site does not give legal advice, tax advice, or customs brokerage services. You are responsible for checking that what you enter is true before you sign the form or give it to a carrier, a broker, or a customs officer.</p>
     <h2>Who sells this</h2>
-    <p>The seller is ${seller}.</p>
+    <p>The seller is ${seller}. Postal address: ${address}.</p>
     <p>Email <a href="mailto:${email}">${email}</a>. There is also a <a href="${origin}/contact/">contact page</a>, a <a href="${origin}/privacy/">privacy policy</a>, <a href="${origin}/terms/">terms of use</a>, and a <a href="${origin}/refund/">refund policy</a>.</p>
     <p>Guides: <a href="${origin}/guides/how-to-fill-out-cbp-form-3299/">how to fill out Form 3299</a>, <a href="${origin}/guides/cbp-form-3299-fedex/">FedEx shipments</a>, and the <a href="${origin}/guides/cbp-form-3299-supplemental-declaration/">supplemental list of articles</a>.</p>
     `,
@@ -94,7 +97,7 @@ const pages = [
     body: `
     <p>Email <a href="mailto:${email}">${email}</a>.</p>
     <p>Use that address for a question about a purchase, a download, or a refund. For a refund, write within 14 days of payment. You do not need to give a reason. Read the <a href="${origin}/refund/">refund policy</a>.</p>
-    <p>The seller is ${seller}.</p>
+    <p>The seller is ${seller}. Postal address: ${address}.</p>
     <p>This site is not U.S. Customs and Border Protection. For the blank form, use <a href="${blankForm}">the free CBP PDF</a>.</p>
     `,
   },
@@ -104,19 +107,35 @@ const pages = [
     description:
       'How cbpform3299.com handles what you type. The draft stays in your browser. The paid PDF is built after Stripe confirms payment and is not stored.',
     body: `
-    <p>This policy is from ${seller}, the seller of cbpform3299.com. Questions: <a href="mailto:${email}">${email}</a>. Last updated 5 November 2026.</p>
-    <h2>What the form contains</h2>
-    <p>Form 3299 asks for details such as your name, address, date of birth, and passport or other ID numbers. Those answers stay in your browser. When you download the clean PDF, they are sent to our payment check only long enough to build the file.</p>
+    <p>This policy is from ${seller}, the seller of cbpform3299.com. Postal address: ${address}. Questions: <a href="mailto:${email}">${email}</a>. Last updated 5 November 2026.</p>
+    <h2>What the form collects</h2>
+    <p>The form collects only what you type or select:</p>
+    <ul>
+      <li>your name (last name, first name, and middle initial) and date of birth</li>
+      <li>a U.S. address</li>
+      <li>travel details: date of arrival, port of arrival, and the vessel or flight</li>
+      <li>names of household members you enter</li>
+      <li>shipment details: date the goods arrive, carrier, country the goods are sent from, bill of lading or air waybill number, number of containers, and marks and numbers</li>
+      <li>the residency category you select, the country you enter, and any length of stay you enter</li>
+      <li>dates you enter if you mark the personnel or evacuee section</li>
+      <li>the article boxes you mark, and any item description, value, and place and date acquired</li>
+      <li>whether you sign as the importer or as an agent, the date, and an agent or firm name if you type one</li>
+    </ul>
+    <p>The form does not ask for a passport number or a Social Security number.</p>
+    <p>Those answers stay in your browser. They are sent to the payment check only for the moment it takes to build the PDF.</p>
     <p>We do not store those answers on a server.</p>
-    <p>Stripe takes the payment on Stripe's own site and receives your name, email and card details under its own <a href="https://stripe.com/privacy">privacy policy</a>. We do not receive your card number.</p>
-    <h2>Hosting</h2>
-    <p>This site is hosted on GitHub Pages (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub, Inc.</a>). The payment check runs on Cloudflare Workers (<a href="https://www.cloudflare.com/privacypolicy/">Cloudflare, Inc.</a>). Like any web host, they receive your IP address and basic browser details when you visit, to deliver the site and keep it secure, under their own privacy policies.</p>
-    <h2>Analytics</h2>
-    <p>We do not use advertising cookies. If you choose Accept Analytics, we use Google Analytics (Google LLC) to count visits and see which pages are used. Google receives your IP address and device details and sets analytics cookies, under <a href="https://policies.google.com/privacy">Google's privacy policy</a>. If you choose Essential Only, Google Analytics does not load. You can change your choice at any time using the cookie settings link in the footer. The form draft uses your browser's local storage, which is not an advertising cookie.</p>
+    <h2>Who else handles data</h2>
+    <ul>
+      <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Pages</a> (GitHub, Inc.) hosts this site and processes IP addresses.</li>
+      <li><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> (Cloudflare, Inc.) runs the payment check and processes IP addresses.</li>
+      <li><a href="https://stripe.com/privacy">Stripe</a> receives your name, email and payment details on its hosted payment page, under its own privacy policy. We do not receive your card number.</li>
+      <li><a href="https://policies.google.com/privacy">Google Analytics</a> (Google LLC) receives IP and device data only after you choose Accept Analytics. If you choose Essential Only, Google Analytics does not load.</li>
+    </ul>
+    <p>We do not use advertising cookies. You can change your analytics choice at any time using the cookie settings link in the footer. The form draft uses your browser's local storage, which is not an advertising cookie.</p>
     <h2>What we keep</h2>
-    <p>If you email us, we keep your email and any Stripe receipt you send for as long as we need to handle your request, refunds and tax records. Stripe keeps payment records under <a href="https://stripe.com/privacy">its own policy</a>.</p>
+    <p>If you email us, we keep that email and any Stripe receipt you send for as long as needed for refunds and tax records. Stripe keeps payment records under <a href="https://stripe.com/privacy">its own privacy policy</a>.</p>
     <h2>Your rights</h2>
-    <p>You can ask us for a copy of the personal information we hold about you, or ask us to correct or delete it, by emailing <a href="mailto:${email}">${email}</a>. We will reply within 30 days. We may need to keep some payment records where the law requires it. If you are in the EU or UK, you can also complain to your local data protection authority.</p>
+    <p>You can email <a href="mailto:${email}">${email}</a> to ask for access to or deletion of your data. We will reply within 30 days. We may need to keep some payment records where the law requires it. If you are in the EU or UK, you can also complain to your local data protection authority.</p>
     <h2>Children</h2>
     <p>This service is for adults 18 and older.</p>
     <h2>Erasing the draft</h2>
@@ -130,8 +149,10 @@ const pages = [
       'Terms for the independent CBP Form 3299 fill-in tool at cbpform3299.com. Not a government service. The clean PDF is a one-time $4.99 charge.',
     body: `
     <p>These terms are between you and ${seller} ("we") for cbpform3299.com. Last updated 5 November 2026. Questions: <a href="mailto:${email}">${email}</a>.</p>
+    <p>The seller is ${seller}. Postal address: ${address}.</p>
     <h2>1. What this is</h2>
-    <p>A helper that fills in CBP Form 3299 from answers you type. It is not CBP, DHS, or any other government agency. The blank form is free from CBP at <a href="${blankForm}">cbp.gov</a>.</p>
+    <p>A helper that places answers you type onto CBP Form 3299. It is not CBP, DHS, or any other government agency. The blank form is free from CBP at <a href="${blankForm}">cbp.gov</a>.</p>
+    <p>You choose every answer. The tool only places your answers on the form. It does not decide whether you qualify for anything, and it does not choose a category for you.</p>
     <h2>2. Not advice</h2>
     <p>We do not provide legal advice, tax advice, or customs brokerage. You must check your answers before you sign the form. A carrier, broker, or customs officer may still ask you to change it.</p>
     <h2>3. Price</h2>
@@ -142,7 +163,15 @@ const pages = [
     <p>You must be 18 or older. You must not use the tool to make a false statement to customs.</p>
     <h2>6. Acceptance of the file</h2>
     <p>We do not guarantee that a carrier, a broker, or a government office will accept the file.</p>
-    <h2>7. Contact</h2>
+    <h2>7. As is</h2>
+    <p>The service is provided as is.</p>
+    <h2>8. Limit on liability</h2>
+    <p>Our liability is limited to the $4.99 you paid, except where the law does not allow that limit.</p>
+    <h2>9. Changes to these terms</h2>
+    <p>We may update these terms, and the version shown when you paid applies to your purchase.</p>
+    <h2>10. Governing law</h2>
+    <p>Governing law: ${governingLaw}.</p>
+    <h2>11. Contact</h2>
     <p>Email <a href="mailto:${email}">${email}</a>.</p>
     `,
   },
@@ -156,7 +185,7 @@ const pages = [
     <p>Email <a href="mailto:${email}">${email}</a> and include your Stripe receipt if you have it. You do not need to give a reason. You do not need a letter from a mover, a carrier, or a broker.</p>
     <p>We will refund the full $4.99 to the original payment method.</p>
     <p>If something went wrong, email us before you ask your card company to dispute the charge. We would rather refund you ourselves, and a refund is usually faster than a dispute.</p>
-    <p>The seller is ${seller}.</p>
+    <p>The seller is ${seller}. Postal address: ${address}.</p>
     `,
   },
 ];

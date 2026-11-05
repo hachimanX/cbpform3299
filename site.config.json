@@ -1,4 +1,6 @@
 {
   "sellerName": "{{SELLER_NAME}}",
-  "sellerEmail": "{{SELLER_CONTACT_EMAIL}}"
+  "sellerEmail": "{{SELLER_CONTACT_EMAIL}}",
+  "sellerAddress": "{{SELLER_ADDRESS}}",
+  "governingLaw": "{{GOVERNING_LAW}}"
 }

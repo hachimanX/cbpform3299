@@ -20,7 +20,7 @@ export const Footer: React.FC<FooterProps> = ({ onEraseData }) => {
               </span>
             </div>
             <p className="text-xs text-slate-400 max-w-md leading-relaxed">
-              The trusted, plain-English digital assistant for compiling U.S. Customs Form 3299 (Declaration for Free Entry of Unaccompanied Articles). Helping international relocators, military personnel, and expats move household goods smoothly.
+              A plain-English tool that places your answers on CBP Form 3299 (Declaration for Free Entry of Unaccompanied Articles). You choose every answer.
             </p>
             <div className="flex items-center space-x-3 text-xs text-slate-300">
               <div className="flex items-center space-x-1.5 text-emerald-400 font-medium">

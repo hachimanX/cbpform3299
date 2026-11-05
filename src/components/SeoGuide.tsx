@@ -77,7 +77,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
                 <span className="text-xs font-extrabold text-blue-600 uppercase tracking-wider">Part IV</span>
                 <h4 className="font-bold text-slate-900 text-base">Declaration of Articles &amp; Tariff Rules</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  This is where most filers make errors. You check boxes regarding whether your household effects were owned and used abroad for <strong>at least one full year</strong> (qualifying for duty-free exemption 9804.00.05), or if you are carrying alcohol, tobacco, commercial resale items, or articles acquired under 1 year.
+                  You choose the boxes. That includes whether you say the household effects were owned and used abroad for at least one full year (the form refers to HTSUS 9804.00.05), and whether you are listing alcohol, tobacco, commercial resale items, or articles acquired under one year. The tool does not decide which of those apply to you.
                 </p>
               </div>
             </div>

@@ -78,7 +78,7 @@ Why spend your evening deciphering bureaucratic codes and worrying about customs
 ## 3. Instant In-Browser Generator (Embed)
 
 > ### ⚡ Fill in your Form 3299 in 5 Minutes
-> Skip the confusion. Answer simple, everyday questions—our guided engine fills in **CBP Form 3299 (Rev. 05/24)** and generates your **Supplemental Customs Packing List** automatically.
+> Skip the confusion. You choose every answer. The tool only places those answers on **CBP Form 3299 (Rev. 05/24)** and can also make a supplemental packing list from them.
 > 
 > * **Preview:** The watermarked preview stays in the browser. The paid PDF is built after payment is confirmed and is not stored.
 > * **Zero Recurring Subscriptions:** Just a transparent, one-time payment of **$4.99** (no monthly rebills).

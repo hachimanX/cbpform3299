@@ -26,7 +26,7 @@ export const StepResidency: React.FC<StepResidencyProps> = ({ data, updateData, 
           <div>
             <h3 className="text-lg font-bold text-slate-900">3. Status of Arriving Person (Part II)</h3>
             <p className="text-xs text-slate-500">
-              Select your immigration / residency category to determine your duty-free tariff exemptions.
+              Choose the residency category you want on the form. The tool places that choice on CBP Form 3299. It does not decide which category applies to you.
             </p>
           </div>
         </div>
