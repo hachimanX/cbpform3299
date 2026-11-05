@@ -47,6 +47,11 @@ export const Footer: React.FC<FooterProps> = ({ onEraseData }) => {
               <li><a href="/terms/" className="hover:text-amber-400 transition-colors">Terms of use</a></li>
               <li><a href="/refund/" className="hover:text-amber-400 transition-colors">Refund policy</a></li>
               <li>
+                <a href="#cookie-settings" data-cookie-settings className="hover:text-amber-400 transition-colors">
+                  Cookie settings
+                </a>
+              </li>
+              <li>
                 <button
                   type="button"
                   onClick={onEraseData}

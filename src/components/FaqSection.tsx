@@ -46,7 +46,7 @@ const faqs: FaqItem[] = [
   {
     question: 'What if my mover or broker rejects the generated form?',
     answer:
-      'The file is filled onto CBP Form 3299 (Rev. 05/24), the blank form published by CBP. If you want your money back for any reason, email us within 14 days of payment for a full refund. You do not need a letter from a mover or broker.',
+      "We can't promise that a carrier, a broker or CBP will accept the file. It is filled onto CBP Form 3299 (Rev. 05/24), the blank form published by CBP. If you want your money back for any reason, email us within 14 days of payment for a full refund. You do not need a letter from a mover or broker.",
   },
 ];
 

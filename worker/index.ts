@@ -98,6 +98,7 @@ export default {
 
     let payload: { session_id?: unknown; form?: unknown };
     try {
+      // Read the body only to build the PDF. Do not log it.
       const text = await request.text();
       if (text.length > MAX_BODY_BYTES) {
         return jsonResponse({ error: 'too_large' }, 413, origin);

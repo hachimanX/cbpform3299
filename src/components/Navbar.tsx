@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onStartGenerator }) => {
       {/* Non-affiliation disclosure (above the fold on every viewport, scrolls away) */}
       <div className="bg-amber-50 text-slate-900 border-t border-amber-200 text-[13px] leading-snug">
         <p className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-          <strong>Independent service — not a government website.</strong> cbpform3299.com is an independent service and is not affiliated with U.S. Customs and Border Protection (CBP) or DHS. You can download the blank CBP Form 3299 free at{' '}
+          <strong>Independent service, not a government website.</strong> cbpform3299.com is an independent service and is not affiliated with U.S. Customs and Border Protection (CBP) or DHS. You can download the blank CBP Form 3299 free at{' '}
           <a href="https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf" target="_blank" rel="noreferrer" className="underline font-semibold text-blue-800">cbp.gov</a>. We charge $4.99 for our guided fill-in tool and a clean, filled PDF.
         </p>
       </div>

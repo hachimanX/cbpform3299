@@ -77,7 +77,7 @@ export const WizardContainer: React.FC = () => {
               CBP Form 3299 Generator
             </h2>
             <p className="text-sm text-slate-500 mt-1">
-              Step {currentStep} of 4 • Complete all sections to compile your Form 3299 PDF.
+              Step {currentStep} of 4 • Complete all sections to get your Form 3299 PDF.
             </p>
           </div>
 

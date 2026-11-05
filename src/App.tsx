@@ -6,7 +6,6 @@ import { PricingSection } from './components/PricingSection';
 import { SeoGuide } from './components/SeoGuide';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
-import { CookieBanner } from './components/CookieBanner';
 import { LegalModals } from './components/LegalModals';
 import type { LegalPage } from './components/LegalModals';
 
@@ -63,10 +62,7 @@ export function App() {
         onEraseData={() => setLegalModalPage('deletion')}
       />
 
-      {/* GDPR / Cookie Banner */}
-      <CookieBanner />
-
-      {/* Legal Modals (Terms, Privacy, Refund, Disclaimers, Data Deletion) */}
+      {/* Legal Modals (data deletion). The cookie banner is public/consent.js. */}
       <LegalModals
         page={legalModalPage}
         onClose={() => setLegalModalPage(null)}

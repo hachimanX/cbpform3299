@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
                   <span>Preview stays in your browser</span>
                 </h3>
                 <p className="text-xs text-slate-400 mt-1 leading-normal">
-                  The draft and watermarked preview stay on this device. The paid PDF is built only after Stripe confirms payment, and those answers are not stored.
+                  The draft and watermarked preview stay on this device. The paid PDF is built only after Stripe confirms payment. Your answers are not stored.
                 </p>
               </div>
             </div>
