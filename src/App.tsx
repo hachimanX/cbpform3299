@@ -6,7 +6,6 @@ import { PricingSection } from './components/PricingSection';
 import { SeoGuide } from './components/SeoGuide';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
-import { CookieBanner } from './components/CookieBanner';
 import { LegalModals } from './components/LegalModals';
 import type { LegalPage } from './components/LegalModals';
 
@@ -32,7 +31,6 @@ export function App() {
       {/* Top Navigation */}
       <Navbar
         onStartGenerator={scrollToWizard}
-        onOpenLegal={(page) => setLegalModalPage(page)}
       />
 
       {/* Hero Section */}
@@ -43,9 +41,7 @@ export function App() {
 
       {/* Main Interactive Questionnaire & Generator */}
       <main className="flex-1">
-        <WizardContainer
-          onOpenLegal={(page) => setLegalModalPage(page)}
-        />
+        <WizardContainer />
 
         {/* Pricing Comparison */}
         <PricingSection
@@ -63,19 +59,13 @@ export function App() {
 
       {/* Footer with Compliance & Disclaimers */}
       <Footer
-        onOpenLegal={(page) => setLegalModalPage(page)}
+        onEraseData={() => setLegalModalPage('deletion')}
       />
 
-      {/* GDPR / Cookie Banner */}
-      <CookieBanner
-        onOpenPrivacy={() => setLegalModalPage('privacy')}
-      />
-
-      {/* Legal Modals (Terms, Privacy, Refund, Disclaimers, Data Deletion) */}
+      {/* Legal Modals (data deletion). The cookie banner is public/consent.js. */}
       <LegalModals
         page={legalModalPage}
         onClose={() => setLegalModalPage(null)}
-        onSelectPage={(p) => setLegalModalPage(p)}
       />
     </div>
   );

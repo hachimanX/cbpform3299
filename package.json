@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-server && node scripts/prerender.mjs",
+    "build": "tsc -b && node scripts/render-pages.mjs && vite build && vite build --ssr src/entry-server.tsx --outDir dist-server && node scripts/prerender.mjs && node scripts/stamp-seller.mjs && node scripts/check-site.mjs",
+    "test": "node --test worker/assessSession.test.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

@@ -15,27 +15,6 @@
     <meta name="google-site-verification" content="0CMuzYdyEvLhwjHEbf8C4dth-N8vh8E3YEVL_GyzL_E" />
     <link rel="alternate" type="text/markdown" href="https://cbpform3299.com/ai-instructions.md" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-53QTDCN8S3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      // Consent Mode v2: no analytics cookies until the visitor accepts the banner
-      gtag('consent', 'default', {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied'
-      });
-      try {
-        if (localStorage.getItem('cbp_3299_cookie_consent') === 'accepted') {
-          gtag('consent', 'update', { analytics_storage: 'granted' });
-        }
-      } catch (e) {}
-      gtag('js', new Date());
-
-      gtag('config', 'G-53QTDCN8S3');
-    </script>
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
@@ -76,7 +55,7 @@
               "name": "Is my passport number or sensitive data stored on your servers?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. The generator runs 100% locally inside your web browser. No passport numbers, SSNs, or personal details are ever uploaded or stored on external servers."
+                "text": "The draft and the watermarked preview stay in your browser. The paid PDF is built only after Stripe confirms payment. Those answers are sent for that download and are not stored."
               }
             },
             {
@@ -96,5 +75,6 @@
   <body class="bg-slate-50 text-slate-900 antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <script src="/consent.js" defer></script>
+</body>
 </html>

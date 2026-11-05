@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 dist-server
+.wrangler
+.dev.vars

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle, ShieldCheck } from 'lucide-react';
+import { SELLER_CONTACT_EMAIL } from '../site';
 
 interface FaqItem {
   question: string;
@@ -20,12 +21,12 @@ const faqs: FaqItem[] = [
   {
     question: 'Is my personal data or passport number stored on your servers?',
     answer:
-      'NO. Absolutely not. Our generator runs 100% locally inside your web browser using modern client-side JavaScript. Your passport numbers, addresses, and flight details are never sent to, logged by, or stored on our servers. When you close or reset the browser, your data remains completely under your control.',
+      'The draft and the watermarked preview stay in this browser. They are not saved on a server. When you download the paid PDF, the answers needed to fill the form are sent to a payment check. That check asks Stripe if the payment went through, builds the PDF, and does not store the answers. You can erase the draft from this browser at any time.',
   },
   {
     question: 'What qualifies as duty-free household goods?',
     answer:
-      'Under Harmonized Tariff Schedule subheading 9804.00.05, household effects (such as furniture, carpets, paintings, tableware, books, and linens) that have been owned and used abroad by you or your family for not less than one full year enter the United States completely duty-free.',
+      'The written tariff rule, HTSUS 9804.00.05, describes household effects (such as furniture, carpets, paintings, tableware, books, and linens) that have been owned and used abroad by you or your family for not less than one full year. The tool does not decide whether that rule applies to your goods.',
   },
   {
     question: 'Can I include wine or alcohol in my shipment?',
@@ -45,7 +46,7 @@ const faqs: FaqItem[] = [
   {
     question: 'What if my mover or broker rejects the generated form?',
     answer:
-      'We format our output strictly using the latest official CBP Form 3299 (Rev. 05/24) template with exact federal AcroForm fields. In the unlikely event that your moving agent or customs officer rejects the document layout, we offer a refund guarantee (minus third-party payment processing fees). Simply email written proof of carrier rejection to support@cbpform3299.com within 14 days of purchase.',
+      "We can't promise that a carrier, a broker or CBP will accept the file. It is filled onto CBP Form 3299 (Rev. 05/24), the blank form published by CBP. If you want your money back for any reason, email us within 14 days of payment for a full refund. You do not need a letter from a mover or broker.",
   },
 ];
 
@@ -109,9 +110,9 @@ export const FaqSection: React.FC = () => {
         <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200/80 flex items-center justify-center space-x-3 text-xs text-blue-900">
           <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
           <span>
-            Need help with a unique relocation situation? Contact our support desk at{' '}
-            <a href="mailto:support@cbpform3299.com" className="font-bold underline">
-              support@cbpform3299.com
+            Questions about a purchase or a refund? Email{' '}
+            <a href={`mailto:${SELLER_CONTACT_EMAIL}`} className="font-bold underline">
+              {SELLER_CONTACT_EMAIL}
             </a>
           </span>
         </div>

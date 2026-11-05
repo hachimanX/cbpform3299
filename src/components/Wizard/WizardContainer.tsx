@@ -7,13 +7,9 @@ import { StepArticles } from './StepArticles';
 import { StepReviewExport } from './StepReviewExport';
 import { Check, User, Compass, Box, Download, RotateCcw } from 'lucide-react';
 
-interface WizardContainerProps {
-  onOpenLegal: (page: 'terms' | 'privacy' | 'refund' | 'disclaimer') => void;
-}
-
 const STORAGE_KEY = 'cbp_3299_form_draft_v1';
 
-export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal }) => {
+export const WizardContainer: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   // Start from the defaults so the pre-rendered HTML matches; the saved draft is restored after mount
   const [formData, setFormData] = useState<CBPFormData>(initialFormData);
@@ -38,17 +34,19 @@ export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal })
     } catch {}
   }, [formData, draftRestored]);
 
-  // Check for return from Stripe payment
+  // Open the review step only for a real Stripe checkout session id.
+  // ?paid=true and ?payment=success do not unlock anything.
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('payment') === 'success' || urlParams.get('paid') === 'true') {
+    if (!draftRestored) return;
+    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+    if (sessionId && /^cs_[A-Za-z0-9_]+$/.test(sessionId)) {
       setCurrentStep(4);
       const wizardEl = document.getElementById('wizard-section');
       if (wizardEl) {
         wizardEl.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }, []);
+  }, [draftRestored]);
 
   const updateFormData = (fields: Partial<CBPFormData>) => {
     setFormData((prev) => ({ ...prev, ...fields }));
@@ -79,7 +77,7 @@ export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal })
               CBP Form 3299 Generator
             </h2>
             <p className="text-sm text-slate-500 mt-1">
-              Step {currentStep} of 4 • Complete all sections to compile your official PDF declaration.
+              Step {currentStep} of 4 • Complete all sections to get your Form 3299 PDF.
             </p>
           </div>
 
@@ -171,7 +169,6 @@ export const WizardContainer: React.FC<WizardContainerProps> = ({ onOpenLegal })
             data={formData}
             updateData={updateFormData}
             onPrev={() => setCurrentStep(3)}
-            onOpenLegal={onOpenLegal}
           />
         )}
       </div>

@@ -68,7 +68,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
                 <span className="text-xs font-extrabold text-blue-600 uppercase tracking-wider">Part III</span>
                 <h4 className="font-bold text-slate-900 text-base">U.S. Personnel &amp; Evacuees Only</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Reserved strictly for U.S. military service members, Department of Defense contractors, foreign service diplomats, and official evacuees entering under government travel orders. Civilians must leave this part blank.
+                  Reserved for U.S. military service members, Department of Defense contractors, foreign service diplomats, and evacuees entering under government travel orders. Civilians must leave this part blank.
                 </p>
               </div>
 
@@ -77,7 +77,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
                 <span className="text-xs font-extrabold text-blue-600 uppercase tracking-wider">Part IV</span>
                 <h4 className="font-bold text-slate-900 text-base">Declaration of Articles &amp; Tariff Rules</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  This is where most filers make errors. You check boxes regarding whether your household effects were owned and used abroad for <strong>at least one full year</strong> (qualifying for duty-free exemption 9804.00.05), or if you are carrying alcohol, tobacco, commercial resale items, or articles acquired under 1 year.
+                  You choose the boxes. That includes whether you say the household effects were owned and used abroad for at least one full year (the form refers to HTSUS 9804.00.05), and whether you are listing alcohol, tobacco, commercial resale items, or articles acquired under one year. The tool does not decide which of those apply to you.
                 </p>
               </div>
             </div>
@@ -191,7 +191,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
               Ready to generate your compliant Form 3299?
             </h3>
             <p className="text-xs text-slate-300">
-              Skip the manual paperwork. Answer our guided questions and get your official print-ready PDF in 3 minutes.
+              Skip the manual paperwork. Answer our guided questions and download your filled PDF in a few minutes.
             </p>
           </div>
 
