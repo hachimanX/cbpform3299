@@ -124,18 +124,16 @@ const pages = [
     <p>The form does not ask for a passport number or a Social Security number.</p>
     <p>Those answers stay in your browser. They are sent to the payment check only for the moment it takes to build the PDF.</p>
     <p>We do not store those answers on a server.</p>
-    <h2>Who else handles data</h2>
-    <ul>
-      <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Pages</a> (GitHub, Inc.) hosts this site and processes IP addresses.</li>
-      <li><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> (Cloudflare, Inc.) runs the payment check and processes IP addresses.</li>
-      <li><a href="https://stripe.com/privacy">Stripe</a> receives your name, email and payment details on its hosted payment page, under its own privacy policy. We do not receive your card number.</li>
-      <li><a href="https://policies.google.com/privacy">Google Analytics</a> (Google LLC) receives IP and device data only after you choose Accept Analytics. If you choose Essential Only, Google Analytics does not load.</li>
-    </ul>
-    <p>We do not use advertising cookies. You can change your analytics choice at any time using the cookie settings link in the footer. The form draft uses your browser's local storage, which is not an advertising cookie.</p>
+    <h2>Hosting</h2>
+    <p>This site is hosted on GitHub Pages (GitHub, Inc.). The payment check runs on Cloudflare Workers (Cloudflare, Inc.). Like any web host, they receive your IP address and basic browser details when you visit, to deliver the site and keep it secure, under their own privacy policies.</p>
+    <p><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy policy</a>. <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare privacy policy</a>.</p>
+    <p>Stripe takes the payment on Stripe's own site and receives your name, email and card details under its own privacy policy. We do not receive your card number. <a href="https://stripe.com/privacy">https://stripe.com/privacy</a></p>
+    <h2>Analytics</h2>
+    <p>We do not use advertising cookies. If you choose Accept Analytics, we use Google Analytics (Google LLC) to count visits and see which pages are used. Google receives your IP address and device details and sets analytics cookies, under Google's privacy policy. If you choose Essential Only, Google Analytics does not load. You can change your choice at any time using the cookie settings link in the footer. The form draft uses your browser's local storage, which is not an advertising cookie. <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></p>
     <h2>What we keep</h2>
-    <p>If you email us, we keep that email and any Stripe receipt you send for as long as needed for refunds and tax records. Stripe keeps payment records under <a href="https://stripe.com/privacy">its own privacy policy</a>.</p>
+    <p>If you email us, we keep your email and any Stripe receipt you send for as long as we need to handle your request, refunds and tax records. Stripe keeps payment records under its own policy.</p>
     <h2>Your rights</h2>
-    <p>You can email <a href="mailto:${email}">${email}</a> to ask for access to or deletion of your data. We will reply within 30 days. We may need to keep some payment records where the law requires it. If you are in the EU or UK, you can also complain to your local data protection authority.</p>
+    <p>You can ask us for a copy of the personal information we hold about you, or ask us to correct or delete it, by emailing <a href="mailto:${email}">${email}</a>. We will reply within 30 days. We may need to keep some payment records where the law requires it. If you are in the EU or UK, you can also complain to your local data protection authority.</p>
     <h2>Children</h2>
     <p>This service is for adults 18 and older.</p>
     <h2>Erasing the draft</h2>

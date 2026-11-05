@@ -64,6 +64,8 @@
     if (typeof window.gtag === 'function') {
       window.gtag('consent', 'update', { analytics_storage: 'denied' });
     }
+    // Drop any later Analytics calls for the rest of this page.
+    window.gtag = function () {};
     clearAnalyticsCookies();
   }
 
