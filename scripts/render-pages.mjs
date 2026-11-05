@@ -5,7 +5,7 @@ const config = JSON.parse(readFileSync(resolve('site.config.json'), 'utf8'));
 const seller = config.sellerName;
 const email = config.sellerEmail;
 const address = config.sellerAddress;
-const governingLaw = config.governingLaw;
+const governingState = config.governingState;
 const origin = 'https://cbpform3299.com';
 const blankForm = 'https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf';
 
@@ -152,7 +152,7 @@ const pages = [
     <p>A helper that places answers you type onto CBP Form 3299. It is not CBP, DHS, or any other government agency. The blank form is free from CBP at <a href="${blankForm}">cbp.gov</a>.</p>
     <p>You choose every answer. The tool only places your answers on the form. It does not decide whether you qualify for anything, and it does not choose a category for you.</p>
     <h2>2. Not advice</h2>
-    <p>We do not provide legal advice, tax advice, or customs brokerage. You must check your answers before you sign the form. A carrier, broker, or customs officer may still ask you to change it.</p>
+    <p>Everything on this site, including the guides and FAQ, is general information, not legal, tax or customs advice. We do not provide customs brokerage. You must check your answers before you sign the form. A carrier, broker, or customs officer may still ask you to change it.</p>
     <h2>3. Price</h2>
     <p>The clean PDF costs $4.99, paid once through Stripe. There is no subscription. The watermarked preview and the packing-list PDF are free.</p>
     <h2>4. Refunds</h2>
@@ -168,7 +168,7 @@ const pages = [
     <h2>9. Changes to these terms</h2>
     <p>We may update these terms, and the version shown when you paid applies to your purchase.</p>
     <h2>10. Governing law</h2>
-    <p>Governing law: ${governingLaw}.</p>
+    <p>These terms are governed by the laws of the State of ${governingState}, United States. If you are a consumer in the EU, the UK or another country with mandatory consumer protection laws, you keep the rights those laws give you, and nothing in these terms takes them away.</p>
     <h2>11. Contact</h2>
     <p>Email <a href="mailto:${email}">${email}</a>.</p>
     `,

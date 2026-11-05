@@ -4,4 +4,4 @@ import config from '../site.config.json' with { type: 'json' };
 export const SELLER_NAME = config.sellerName;
 export const SELLER_CONTACT_EMAIL = config.sellerEmail;
 export const SELLER_ADDRESS = config.sellerAddress;
-export const GOVERNING_LAW = config.governingLaw;
+export const GOVERNING_STATE = config.governingState;

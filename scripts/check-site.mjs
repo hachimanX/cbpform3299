@@ -1,5 +1,5 @@
-import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { extname, resolve } from 'node:path';
 import assert from 'node:assert/strict';
 
 const dist = resolve('dist');
@@ -93,4 +93,27 @@ assert.match(review, /legacyBypass/);
 assert.doesNotMatch(review, /isWatermarked:\s*false/);
 assert.doesNotMatch(review, /setUnlockPhase\('unlocked'\)[\s\S]{0,80}legacyBypass/);
 
-console.log(`check-site: ${locs.length} sitemap urls, titles unique, paywall bypass absent from the client bundle`);
+const placeholder = /\{\{[^}]+\}\}/g;
+const textExt = new Set(['.html', '.js', '.mjs', '.txt', '.md', '.xml', '.json', '.css', '.svg']);
+function walkDist(dir, out = []) {
+  for (const name of readdirSync(dir)) {
+    const path = resolve(dir, name);
+    if (statSync(path).isDirectory()) walkDist(path, out);
+    else if (textExt.has(extname(name))) out.push(path);
+  }
+  return out;
+}
+
+const leftovers = [];
+for (const file of walkDist(dist)) {
+  const text = readFileSync(file, 'utf8');
+  const found = text.match(placeholder);
+  if (found) leftovers.push(`${file.replace(dist, 'dist')}: ${[...new Set(found)].join(', ')}`);
+}
+if (leftovers.length) {
+  throw new Error(
+    `Refusing to publish while {{placeholders}} remain in dist:\n${leftovers.join('\n')}`,
+  );
+}
+
+console.log(`check-site: ${locs.length} sitemap urls, titles unique, paywall bypass absent from the client bundle, no placeholders in dist`);

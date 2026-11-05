@@ -19,14 +19,14 @@ Edit `site.config.json` only:
 
 ```json
 {
-  "sellerName": "the name you want on the about, terms, and refund pages",
+  "sellerName": "Kinder Days Press",
   "sellerEmail": "the inbox you will read",
   "sellerAddress": "the business postal address",
-  "governingLaw": "the law that governs the terms"
+  "governingState": "the U.S. state of the company"
 }
 ```
 
-The pages currently show `{{SELLER_NAME}}`, `{{SELLER_CONTACT_EMAIL}}`, `{{SELLER_ADDRESS}}`, and `{{GOVERNING_LAW}}`. The site used to display `support@cbpform3299.com`. Use that mailbox only if it is really yours. Do not invent a city in the surrounding sentences. Put the postal address only in `sellerAddress`.
+The pages currently show Kinder Days Press, plus the placeholders `{{SELLER_CONTACT_EMAIL}}`, `{{SELLER_ADDRESS}}`, and `{{LLC_STATE}}`. The site used to display `support@cbpform3299.com`. Use that mailbox only if it is really yours. Do not invent a city in the surrounding sentences. Put the postal address only in `sellerAddress`, and the state name only in `governingState`. `npm run build` fails while any `{{...}}` placeholder is still in `dist`, so GitHub Pages will not publish those placeholders.
 
 Rebuild and deploy the site after you change the file (merging this branch does that deploy via GitHub Actions). The placeholders are filled at build time.
 

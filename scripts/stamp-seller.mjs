@@ -6,7 +6,7 @@ const replacements = [
   ['{{SELLER_NAME}}', config.sellerName],
   ['{{SELLER_CONTACT_EMAIL}}', config.sellerEmail],
   ['{{SELLER_ADDRESS}}', config.sellerAddress],
-  ['{{GOVERNING_LAW}}', config.governingLaw],
+  ['{{LLC_STATE}}', config.governingState],
 ];
 
 function walk(dir, out = []) {

@@ -1,6 +1,6 @@
 {
-  "sellerName": "{{SELLER_NAME}}",
+  "sellerName": "Kinder Days Press",
   "sellerEmail": "{{SELLER_CONTACT_EMAIL}}",
   "sellerAddress": "{{SELLER_ADDRESS}}",
-  "governingLaw": "{{GOVERNING_LAW}}"
+  "governingState": "{{LLC_STATE}}"
 }
