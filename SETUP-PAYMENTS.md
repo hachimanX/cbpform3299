@@ -1,6 +1,6 @@
 # Payment setup
 
-The site stays on GitHub Pages. GitHub Pages cannot run the payment check, so the clean PDF is produced by a separate Cloudflare Worker. Do these steps **before you merge** the paywall change if you want a buyer to get the PDF automatically. Until you finish, the Pay button still opens Stripe. A buyer who already paid is told not to pay again and to email {{SELLER_CONTACT_EMAIL}} (set that address in `site.config.json`).
+The site stays on GitHub Pages. GitHub Pages cannot run the payment check, so the clean PDF is produced by a separate Cloudflare Worker. Do these steps **before you merge** the paywall change if you want a buyer to get the PDF automatically. Until you finish, the Pay button still opens Stripe. A buyer who already paid is told not to pay again and to email support@cbpform3299.com.
 
 Nothing in this file is a Stripe key. Do not paste a secret key into the repo, into GitHub, or into `pay-config.json`.
 
@@ -13,22 +13,22 @@ DNS for `cbpform3299.com` is already at Cloudflare, but the website itself is no
 - One secret, one command to deploy, no server to keep running.
 - Do not turn on Cloudflare's proxy (orange cloud) for the apex just to host this function. That would put GitHub Pages behind Cloudflare and can break the certificate. Leave the website where it is.
 
-## 1. Seller name, email, postal address, and governing law
+## 1. Seller name, email, and governing state
 
 Edit `site.config.json` only:
 
 ```json
 {
   "sellerName": "Kinder Days Press",
-  "sellerEmail": "the inbox you will read",
-  "sellerAddress": "the business postal address",
-  "governingState": "the U.S. state of the company"
+  "sellerEmail": "support@cbpform3299.com",
+  "legalEntity": "Bobcat Digital LLC, a Wyoming company",
+  "governingState": "Wyoming"
 }
 ```
 
-The pages currently show Kinder Days Press, plus the placeholders `{{SELLER_CONTACT_EMAIL}}`, `{{SELLER_ADDRESS}}`, and `{{LLC_STATE}}`. The site used to display `support@cbpform3299.com`. Use that mailbox only if it is really yours. Do not invent a city in the surrounding sentences. Put the postal address only in `sellerAddress`, and the state name only in `governingState`. `npm run build` fails while any `{{...}}` placeholder is still in `dist`, so GitHub Pages will not publish those placeholders.
+The visible seller name is Kinder Days Press. The fine print is “Kinder Days Press is a brand of Bobcat Digital LLC, a Wyoming company.” followed by support@cbpform3299.com. No postal address is published. `npm run build` fails if any `{{...}}` placeholder is still in `dist`.
 
-Rebuild and deploy the site after you change the file (merging this branch does that deploy via GitHub Actions). The placeholders are filled at build time.
+Rebuild and deploy the site after you change the file (merging this branch does that deploy via GitHub Actions).
 
 ## 2. Deploy the Worker
 
@@ -98,8 +98,10 @@ Leave automatic tax off unless you also change that amount check. Tax can make `
 
 1. Deploy the Worker and set `STRIPE_SECRET_KEY`.
 2. Put the Worker URL in `public/pay-config.json`.
-3. Merge this branch so GitHub Pages publishes the new site, including `pay-config.json` and `site.config.json`.
-4. Immediately set the Stripe return URL in step 5.
+3. Set up Cloudflare Email Routing for cbpform3299.com so support@cbpform3299.com forwards to your inbox. Send a test email to that address and confirm it arrives.
+4. In Stripe settings, set the public business name and the statement descriptor to Kinder Days Press (or Bobcat Digital LLC) so receipts match the site. Make a test purchase and save the receipt.
+5. Merge this branch so GitHub Pages publishes the new site, including `pay-config.json` and `site.config.json`.
+6. Immediately set the Stripe return URL in step 5.
 
 If you merge before steps 1–2, or if Stripe still returns people to `?paid=true`, the Pay button still opens Stripe, but the clean PDF does not download. The page tells the buyer not to pay a second time and to email you with the Stripe receipt. Finish the steps, then ask them to open the site again from the Stripe receipt's return link, or refund them from the Stripe Dashboard.
 

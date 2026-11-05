@@ -4,8 +4,9 @@ import { dirname, resolve } from 'node:path';
 const config = JSON.parse(readFileSync(resolve('site.config.json'), 'utf8'));
 const seller = config.sellerName;
 const email = config.sellerEmail;
-const address = config.sellerAddress;
+const legalEntity = config.legalEntity;
 const governingState = config.governingState;
+const finePrint = `${seller} is a brand of ${legalEntity}.`;
 const origin = 'https://cbpform3299.com';
 const blankForm = 'https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf';
 
@@ -61,7 +62,7 @@ function page({ slug, title, description, body }) {
       <li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li>
       <li><a href="${blankForm}">Blank form (free at CBP.gov)</a></li>
     </ul>
-    <p>Seller: ${seller}. Postal address: ${address}. Email: <a href="mailto:${email}">${email}</a>.</p>
+    <p class="seller-fineprint">${finePrint} <a href="mailto:${email}">${email}</a></p>
   </footer>
 <script src="/consent.js" defer></script>
 </body>
@@ -84,7 +85,7 @@ const pages = [
     <p>You choose every answer. The tool only places your answers on the form. It does not decide whether you qualify for anything, and it does not choose a category for you.</p>
     <p>This site does not give legal advice, tax advice, or customs brokerage services. You are responsible for checking that what you enter is true before you sign the form or give it to a carrier, a broker, or a customs officer.</p>
     <h2>Who sells this</h2>
-    <p>The seller is ${seller}. Postal address: ${address}.</p>
+    <p>The seller is ${seller}.</p>
     <p>Email <a href="mailto:${email}">${email}</a>. There is also a <a href="${origin}/contact/">contact page</a>, a <a href="${origin}/privacy/">privacy policy</a>, <a href="${origin}/terms/">terms of use</a>, and a <a href="${origin}/refund/">refund policy</a>.</p>
     <p>Guides: <a href="${origin}/guides/how-to-fill-out-cbp-form-3299/">how to fill out Form 3299</a>, <a href="${origin}/guides/cbp-form-3299-fedex/">FedEx shipments</a>, and the <a href="${origin}/guides/cbp-form-3299-supplemental-declaration/">supplemental list of articles</a>.</p>
     `,
@@ -96,8 +97,8 @@ const pages = [
       'Email the seller of this independent Form 3299 fill-in tool about a purchase, a download, or a refund.',
     body: `
     <p>Email <a href="mailto:${email}">${email}</a>.</p>
-    <p>Use that address for a question about a purchase, a download, or a refund. For a refund, write within 14 days of payment. You do not need to give a reason. Read the <a href="${origin}/refund/">refund policy</a>.</p>
-    <p>The seller is ${seller}. Postal address: ${address}.</p>
+    <p>Use that email for a question about a purchase, a download, or a refund. For a refund, write within 14 days of payment. You do not need to give a reason. Read the <a href="${origin}/refund/">refund policy</a>.</p>
+    <p>The seller is ${seller}.</p>
     <p>This site is not U.S. Customs and Border Protection. For the blank form, use <a href="${blankForm}">the free CBP PDF</a>.</p>
     `,
   },
@@ -107,7 +108,8 @@ const pages = [
     description:
       'How cbpform3299.com handles what you type. The draft stays in your browser. The paid PDF is built after Stripe confirms payment and is not stored.',
     body: `
-    <p>This policy is from ${seller}, the seller of cbpform3299.com. Postal address: ${address}. Questions: <a href="mailto:${email}">${email}</a>. Last updated 5 November 2026.</p>
+    <p>${finePrint} <a href="mailto:${email}">${email}</a></p>
+    <p>This policy is from ${seller}, the seller of cbpform3299.com. Last updated 5 November 2026.</p>
     <h2>What the form collects</h2>
     <p>The form collects only what you type or select:</p>
     <ul>
@@ -146,8 +148,8 @@ const pages = [
     description:
       'Terms for the independent CBP Form 3299 fill-in tool at cbpform3299.com. Not a government service. The clean PDF is a one-time $4.99 charge.',
     body: `
-    <p>These terms are between you and ${seller} ("we") for cbpform3299.com. Last updated 5 November 2026. Questions: <a href="mailto:${email}">${email}</a>.</p>
-    <p>The seller is ${seller}. Postal address: ${address}.</p>
+    <p>${finePrint} <a href="mailto:${email}">${email}</a></p>
+    <p>These terms are between you and ${seller} ("we") for cbpform3299.com. Last updated 5 November 2026.</p>
     <h2>1. What this is</h2>
     <p>A helper that places answers you type onto CBP Form 3299. It is not CBP, DHS, or any other government agency. The blank form is free from CBP at <a href="${blankForm}">cbp.gov</a>.</p>
     <p>You choose every answer. The tool only places your answers on the form. It does not decide whether you qualify for anything, and it does not choose a category for you.</p>
@@ -183,7 +185,7 @@ const pages = [
     <p>Email <a href="mailto:${email}">${email}</a> and include your Stripe receipt if you have it. You do not need to give a reason. You do not need a letter from a mover, a carrier, or a broker.</p>
     <p>We will refund the full $4.99 to the original payment method.</p>
     <p>If something went wrong, email us before you ask your card company to dispute the charge. We would rather refund you ourselves, and a refund is usually faster than a dispute.</p>
-    <p>The seller is ${seller}. Postal address: ${address}.</p>
+    <p>The seller is ${seller}.</p>
     `,
   },
 ];

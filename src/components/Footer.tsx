@@ -1,6 +1,6 @@
 import React from 'react';
 import { Lock, Mail, ExternalLink } from 'lucide-react';
-import { SELLER_CONTACT_EMAIL } from '../site';
+import { SELLER_CONTACT_EMAIL, SELLER_FINE_PRINT } from '../site';
 
 interface FooterProps {
   onEraseData: () => void;
@@ -138,6 +138,13 @@ export const Footer: React.FC<FooterProps> = ({ onEraseData }) => {
             Our software assists users with the automated formatting and digital population of user-entered data onto standard publicly accessible PDF templates. We do not provide legal, customs brokerage, or tax advice. The declarant is solely responsible for reviewing the accuracy and completeness of all statements before submitting documents to customs authorities.
           </p>
         </div>
+
+        <p className="text-xs text-slate-500">
+          {SELLER_FINE_PRINT}{' '}
+          <a href={`mailto:${SELLER_CONTACT_EMAIL}`} className="hover:text-amber-400 transition-colors">
+            {SELLER_CONTACT_EMAIL}
+          </a>
+        </p>
 
         {/* Bottom Credits & Copyright */}
         <div className="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
