@@ -5,4 +5,4 @@ export const SELLER_NAME = config.sellerName;
 export const SELLER_CONTACT_EMAIL = config.sellerEmail;
 export const LEGAL_ENTITY = config.legalEntity;
 export const GOVERNING_STATE = config.governingState;
-export const SELLER_FINE_PRINT = `${SELLER_NAME} is a brand of ${LEGAL_ENTITY}.`;
+export const REGISTERED_AGENT_ADDRESS = config.registeredAgentAddress;

@@ -6,7 +6,8 @@ const seller = config.sellerName;
 const email = config.sellerEmail;
 const legalEntity = config.legalEntity;
 const governingState = config.governingState;
-const finePrint = `${seller} is a brand of ${legalEntity}.`;
+const registeredAgentAddress = config.registeredAgentAddress;
+const finePrintHtml = `${seller} is a brand of ${legalEntity}. Registered agent address: ${registeredAgentAddress}. Contact: <a href="mailto:${email}">${email}</a>`;
 const origin = 'https://cbpform3299.com';
 const blankForm = 'https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf';
 
@@ -62,7 +63,7 @@ function page({ slug, title, description, body }) {
       <li><a href="#cookie-settings" data-cookie-settings>Cookie settings</a></li>
       <li><a href="${blankForm}">Blank form (free at CBP.gov)</a></li>
     </ul>
-    <p class="seller-fineprint">${finePrint} <a href="mailto:${email}">${email}</a></p>
+    <p class="seller-fineprint">${finePrintHtml}</p>
   </footer>
 <script src="/consent.js" defer></script>
 </body>
@@ -108,7 +109,7 @@ const pages = [
     description:
       'How cbpform3299.com handles what you type. The draft stays in your browser. The paid PDF is built after Stripe confirms payment and is not stored.',
     body: `
-    <p>${finePrint} <a href="mailto:${email}">${email}</a></p>
+    <p>${finePrintHtml}</p>
     <p>This policy is from ${seller}, the seller of cbpform3299.com. Last updated 5 November 2026.</p>
     <h2>What the form collects</h2>
     <p>The form collects only what you type or select:</p>
@@ -148,7 +149,7 @@ const pages = [
     description:
       'Terms for the independent CBP Form 3299 fill-in tool at cbpform3299.com. Not a government service. The clean PDF is a one-time $4.99 charge.',
     body: `
-    <p>${finePrint} <a href="mailto:${email}">${email}</a></p>
+    <p>${finePrintHtml}</p>
     <p>These terms are between you and ${seller} ("we") for cbpform3299.com. Last updated 5 November 2026.</p>
     <h2>1. What this is</h2>
     <p>A helper that places answers you type onto CBP Form 3299. It is not CBP, DHS, or any other government agency. The blank form is free from CBP at <a href="${blankForm}">cbp.gov</a>.</p>

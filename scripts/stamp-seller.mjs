@@ -2,7 +2,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const config = JSON.parse(readFileSync(resolve('site.config.json'), 'utf8'));
-const finePrint = `${config.sellerName} is a brand of ${config.legalEntity}.`;
+const finePrint = `${config.sellerName} is a brand of ${config.legalEntity}. Registered agent address: ${config.registeredAgentAddress}. Contact: <a href="mailto:${config.sellerEmail}">${config.sellerEmail}</a>`;
 const replacements = [
   ['{{SELLER_FINE_PRINT}}', finePrint],
   ['{{SELLER_NAME}}', config.sellerName],

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Lock, Mail, ExternalLink } from 'lucide-react';
-import { SELLER_CONTACT_EMAIL, SELLER_FINE_PRINT } from '../site';
+import { LEGAL_ENTITY, REGISTERED_AGENT_ADDRESS, SELLER_CONTACT_EMAIL, SELLER_NAME } from '../site';
 
 interface FooterProps {
   onEraseData: () => void;
@@ -140,7 +140,7 @@ export const Footer: React.FC<FooterProps> = ({ onEraseData }) => {
         </div>
 
         <p className="text-xs text-slate-500">
-          {SELLER_FINE_PRINT}{' '}
+          {SELLER_NAME} is a brand of {LEGAL_ENTITY}. Registered agent address: {REGISTERED_AGENT_ADDRESS}. Contact:{' '}
           <a href={`mailto:${SELLER_CONTACT_EMAIL}`} className="hover:text-amber-400 transition-colors">
             {SELLER_CONTACT_EMAIL}
           </a>
