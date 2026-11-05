@@ -1,0 +1,164 @@
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+
+const config = JSON.parse(readFileSync(resolve('site.config.json'), 'utf8'));
+const seller = config.sellerName;
+const email = config.sellerEmail;
+const origin = 'https://cbpform3299.com';
+const blankForm = 'https://www.cbp.gov/sites/default/files/2024-05/cbp_form_3299_0.pdf';
+
+const disclosure = `<strong>Independent service — not a government website.</strong> cbpform3299.com is an independent service and is not affiliated with U.S. Customs and Border Protection (CBP) or DHS. You can download the blank CBP Form 3299 free at <a href="${blankForm}">cbp.gov</a>. We charge $4.99 for our guided fill-in tool and a clean, filled PDF.`;
+
+function page({ slug, title, description, body }) {
+  const url = `${origin}/${slug}/`;
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title}</title>
+  <meta name="description" content="${description}" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="${url}" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: #1c1917; background: #fafaf9; line-height: 1.6; }
+    a { color: #0f766e; }
+    header, footer, .bar, main { padding: 16px 20px; }
+    header { background: #134e4a; color: #fff; }
+    header a { color: #fff; text-decoration: none; font-weight: 700; font-family: "Segoe UI", sans-serif; }
+    .bar { background: #fffbeb; color: #1c1917; border-bottom: 1px solid #fde68a; font-family: "Segoe UI", sans-serif; font-size: 15px; }
+    main { max-width: 42rem; margin: 0 auto; padding-top: 28px; padding-bottom: 48px; }
+    h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 12px; }
+    h2 { font-size: 1.25rem; margin: 1.6em 0 0.4em; }
+    p, li { font-size: 1.05rem; }
+    footer { border-top: 1px solid #e7e5e4; font-family: "Segoe UI", sans-serif; font-size: 14px; }
+    footer ul { padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .note { background: #f0fdfa; border: 1px solid #99f6e4; padding: 12px 14px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <header><a href="${origin}/">Form 3299 Helper</a></header>
+  <div class="bar">${disclosure}</div>
+  <main>
+    <h1>${title.replace(' | cbpform3299.com', '')}</h1>
+    ${body}
+  </main>
+  <footer>
+    <p class="note">${disclosure}</p>
+    <ul>
+      <li><a href="${origin}/">Fill-in tool</a></li>
+      <li><a href="${origin}/guides/">Guides</a></li>
+      <li><a href="${origin}/about/">About</a></li>
+      <li><a href="${origin}/contact/">Contact</a></li>
+      <li><a href="${origin}/privacy/">Privacy</a></li>
+      <li><a href="${origin}/terms/">Terms</a></li>
+      <li><a href="${origin}/refund/">Refunds</a></li>
+      <li><a href="${blankForm}">Blank form (free at CBP.gov)</a></li>
+    </ul>
+    <p>Seller: ${seller}. Email: <a href="mailto:${email}">${email}</a>.</p>
+  </footer>
+</body>
+</html>
+`;
+}
+
+const pages = [
+  {
+    slug: 'about',
+    title: 'About this site | cbpform3299.com',
+    description:
+      'cbpform3299.com is an independent Form 3299 fill-in tool. It is not affiliated with U.S. Customs and Border Protection. The blank form is free from CBP.',
+    body: `
+    <p>cbpform3299.com is an independent service that helps you fill in CBP Form 3299 (Declaration for Free Entry of Unaccompanied Articles). It is not a government website. It is not affiliated with, endorsed by, or authorized by U.S. Customs and Border Protection (CBP), the Department of Homeland Security (DHS), or any other government agency.</p>
+    <p>The blank CBP Form 3299 is free from CBP. You can download it at <a href="${blankForm}">cbp.gov</a>. You do not have to pay anyone to get that blank form.</p>
+    <p>This site charges $4.99 once for a guided questionnaire and a clean, filled PDF. You can preview a watermarked copy before you pay.</p>
+    <h2 id="notice">Not affiliated with U.S. Customs and Border Protection</h2>
+    <p class="note">cbpform3299.com is an independent document preparation service and is not affiliated with, sponsored by, endorsed by, or authorized by U.S. Customs and Border Protection (CBP), the U.S. Department of Homeland Security (DHS), or the United States Government. Blank CBP forms and filing instructions are free at <a href="https://www.cbp.gov">cbp.gov</a>.</p>
+    <p>This site does not give legal advice, tax advice, or customs brokerage services. You are responsible for checking that what you enter is true before you sign the form or give it to a carrier, a broker, or a customs officer.</p>
+    <h2>Who sells this</h2>
+    <p>The seller is ${seller}.</p>
+    <p>Email <a href="mailto:${email}">${email}</a>. There is also a <a href="${origin}/contact/">contact page</a>, a <a href="${origin}/privacy/">privacy policy</a>, <a href="${origin}/terms/">terms of use</a>, and a <a href="${origin}/refund/">refund policy</a>.</p>
+    <p>Guides: <a href="${origin}/guides/how-to-fill-out-cbp-form-3299/">how to fill out Form 3299</a>, <a href="${origin}/guides/cbp-form-3299-fedex/">FedEx shipments</a>, and the <a href="${origin}/guides/cbp-form-3299-supplemental-declaration/">supplemental list of articles</a>.</p>
+    `,
+  },
+  {
+    slug: 'contact',
+    title: 'Contact | cbpform3299.com',
+    description:
+      'Email the seller of this independent Form 3299 fill-in tool about a purchase, a download, or a refund.',
+    body: `
+    <p>Email <a href="mailto:${email}">${email}</a>.</p>
+    <p>Use that address for a question about a purchase, a download, or a refund. For a refund, write within 14 days of payment. You do not need to give a reason. Read the <a href="${origin}/refund/">refund policy</a>.</p>
+    <p>The seller is ${seller}.</p>
+    <p>This site is not U.S. Customs and Border Protection. For the blank form, use <a href="${blankForm}">the free CBP PDF</a>.</p>
+    `,
+  },
+  {
+    slug: 'privacy',
+    title: 'Privacy policy | cbpform3299.com',
+    description:
+      'How cbpform3299.com handles what you type. The draft stays in your browser. The paid PDF is built after Stripe confirms payment and is not stored.',
+    body: `
+    <p>This policy is from ${seller}, the seller of cbpform3299.com. Questions: <a href="mailto:${email}">${email}</a>. Last updated 5 November 2026.</p>
+    <h2>1. The draft</h2>
+    <p>Answers you type stay in this browser so you can leave and come back. The watermarked preview is built on your device. We do not keep an account of those answers.</p>
+    <h2>2. The paid PDF</h2>
+    <p>When you download the clean PDF, this site sends the answers needed to fill the form, and the Stripe checkout session id, to a payment check. That check asks Stripe whether the payment status is paid. If it is, the check builds the PDF and returns it to your browser. It does not save the answers or the PDF.</p>
+    <p>Stripe takes the card payment on Stripe's own site. We do not receive your card number.</p>
+    <h2>3. Cookies</h2>
+    <p>We do not use advertising cookies. If you choose "Accept Analytics", the site uses Google Analytics to count visits. If you choose "Essential Only", analytics cookies stay off. The form draft uses local storage, which is not an advertising cookie.</p>
+    <h2>4. What we do not do</h2>
+    <p>We do not sell your information.</p>
+    <h2>5. Children</h2>
+    <p>This service is for adults 18 and older.</p>
+    <h2>6. Erasing the draft</h2>
+    <p>On the fill-in tool, use "Reset / Clear Data" or "Erase draft on this device" to delete the draft from this browser. Email <a href="mailto:${email}">${email}</a> with a privacy question. Because the draft is not stored by us, we cannot look up a copy of it.</p>
+    `,
+  },
+  {
+    slug: 'terms',
+    title: 'Terms of use | cbpform3299.com',
+    description:
+      'Terms for the independent CBP Form 3299 fill-in tool at cbpform3299.com. Not a government service. The clean PDF is a one-time $4.99 charge.',
+    body: `
+    <p>These terms are between you and ${seller} ("we") for cbpform3299.com. Last updated 5 November 2026. Questions: <a href="mailto:${email}">${email}</a>.</p>
+    <h2>1. What this is</h2>
+    <p>A helper that fills in CBP Form 3299 from answers you type. It is not CBP, DHS, or any other government agency. The blank form is free from CBP at <a href="${blankForm}">cbp.gov</a>.</p>
+    <h2>2. Not advice</h2>
+    <p>We do not provide legal advice, tax advice, or customs brokerage. You must check your answers before you sign the form. A carrier, broker, or customs officer may still ask you to change it.</p>
+    <h2>3. Price</h2>
+    <p>The clean PDF costs $4.99, paid once through Stripe. There is no subscription. The watermarked preview and the packing-list PDF are free.</p>
+    <h2>4. Refunds</h2>
+    <p>The <a href="${origin}/refund/">refund policy</a> is part of these terms. You can ask for a full refund within 14 days of payment by email. You do not need to give a reason.</p>
+    <h2>5. Your responsibility</h2>
+    <p>You must be 18 or older. You must not use the tool to make a false statement to customs.</p>
+    <h2>6. Acceptance of the file</h2>
+    <p>We do not guarantee that a carrier, a broker, or a government office will accept the file.</p>
+    <h2>7. Contact</h2>
+    <p>Email <a href="mailto:${email}">${email}</a>.</p>
+    `,
+  },
+  {
+    slug: 'refund',
+    title: 'Refund policy | cbpform3299.com',
+    description:
+      'Full refund of the $4.99 within 14 days if you email the seller. No reason required. No letter from a broker or mover.',
+    body: `
+    <p>You can ask for a full refund of the $4.99 within 14 days of payment.</p>
+    <p>Email <a href="mailto:${email}">${email}</a> and include your Stripe receipt if you have it. You do not need to give a reason. You do not need a letter from a mover, a carrier, or a broker.</p>
+    <p>We will refund the full $4.99 to the original payment method.</p>
+    <p>If something went wrong, email us before you ask your card company to dispute the charge. We would rather refund you ourselves, and a refund is usually faster than a dispute.</p>
+    <p>The seller is ${seller}.</p>
+    `,
+  },
+];
+
+for (const entry of pages) {
+  const file = resolve('public', entry.slug, 'index.html');
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, page(entry));
+  console.log(`wrote ${file}`);
+}

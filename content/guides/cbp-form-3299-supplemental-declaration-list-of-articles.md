@@ -64,7 +64,7 @@ Compiling a customs packing list manually is one of the most tedious parts of mo
 ## 3. Generate Form 3299 & Packing List in One Step (Embed)
 
 > ### ⚡ Auto-Generate Your Form 3299 and Supplemental Packing List
-> Stop formatting manual spreadsheets. Our guided generator creates your official **CBP Form 3299 (Rev. 05/24)** AND your formatted **Supplemental Customs Packing List PDF** together in minutes.
+> Stop formatting manual spreadsheets. Our guided generator fills in **CBP Form 3299 (Rev. 05/24)** AND your formatted **Supplemental Customs Packing List PDF** together in minutes.
 > 
 > * **100% Client-Side Privacy:** All inventory data stays strictly inside your browser.
 > * **Zero Recurring Subscriptions:** Single flat payment of **$4.99** (no monthly rebills).
@@ -116,7 +116,7 @@ Under federal law (**27 CFR Part 478 and the Arms Export Control Act**), transpo
  │ NONRESIDENTS / VISITING ALIENS / IMMIGRANTS                                 │
  │ • MUST obtain an approved ATF Form 6 import permit issued by ATF.           │
  │ • Nonimmigrant visa holders (H-1B, L-1, F-1) must possess a valid state     │
- │   hunting license or an official ATF waiver exception.                      │
+ │   hunting license or an ATF waiver.                      │
  │ • Ammunition must be declared with exact caliber, manufacturer, round count.│
  └─────────────────────────────────────────────────────────────────────────────┘
 ```

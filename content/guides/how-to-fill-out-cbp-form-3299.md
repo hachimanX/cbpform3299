@@ -42,7 +42,7 @@ Before diving into individual line numbers, understand the core categories of in
  └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-If any of these four pillars is inconsistent—such as an arrival date that doesn't match your official I-94 travel record, or a delivery address that differs from your bill of lading—customs will place an administrative hold on your shipment.
+If any of these four pillars is inconsistent—such as an arrival date that doesn't match your I-94 travel record, or a delivery address that differs from your bill of lading—customs will place an administrative hold on your shipment.
 
 ---
 
@@ -50,7 +50,7 @@ If any of these four pillars is inconsistent—such as an arrival date that does
 
 Filling out CBP Form 3299 manually is notoriously frustrating:
 
-1. **Deciphering Obscure Government Jargon:** The official PDF contains 7 complex parts, dense legal cross-references (19 CFR § 148, Tariff item 9804.00.05), and poorly explained check-boxes where checking the wrong box forfeits your duty-free exemption.
+1. **Deciphering Obscure Government Jargon:** The CBP form PDF contains 7 complex parts, dense legal cross-references (19 CFR § 148, Tariff item 9804.00.05), and poorly explained check-boxes where checking the wrong box forfeits your duty-free exemption.
 2. **The Formatting Trap:** Editing non-standard PDF fields often leads to clipped text, corrupted dates, or missing signatures that trigger automated rejections in the CBP Automated Commercial Environment (ACE).
 3. **The Missing Packing List Penalty:** Submitting Form 3299 without an attached, itemized Supplemental Customs Packing List is the #1 reason customs brokers reject filings before port entry. Creating this list by hand takes another hour of spreadsheet formatting.
 4. **The Real Cost of a Mistake:** If your paperwork is rejected at port, your shipment is moved to a bonded Container Freight Station (CFS). Daily demurrage and storage fees range from **$50 to $150 per day**, and physical customs examination fees (VACIS/CET exams) can exceed **$1,500**.
@@ -67,20 +67,20 @@ Filling out CBP Form 3299 manually is notoriously frustrating:
  │ ⚠️ High risk of broker rejection       │ ✅ Automated compliance check      │
  │ 📝 Must build separate packing list    │ 📄 Free formatted packing list PDF │
  │ 💸 Risk of $50–$150/day demurrage fees │ 💳 Flat $4.99 (fraction of coffee) │
- │ 🔒 Manual PDF editors risk data leaks  │ 🛡️ 100% In-Browser client privacy  │
+ │ 🔒 Manual PDF editors risk data leaks  │ Watermarked preview stays in the browser │
  └────────────────────────────────────────┴────────────────────────────────────┘
 ```
 
-Why spend your evening deciphering bureaucratic codes and worrying about customs delays when a guided, automated tool can generate your official, compliant PDF in minutes for less than the price of a cup of coffee?
+Why spend your evening deciphering bureaucratic codes and worrying about customs delays when a guided, automated tool can fill in your Form 3299 PDF in minutes for less than the price of a cup of coffee?
 
 ---
 
 ## 3. Instant In-Browser Generator (Embed)
 
 > ### ⚡ Fill in your Form 3299 in 5 Minutes
-> Skip the confusion. Answer simple, everyday questions—our guided engine fills out the official **CBP Form 3299 (Rev. 05/24)** and generates your **Supplemental Customs Packing List** automatically.
+> Skip the confusion. Answer simple, everyday questions—our guided engine fills in **CBP Form 3299 (Rev. 05/24)** and generates your **Supplemental Customs Packing List** automatically.
 > 
-> * **100% Client-Side Privacy:** Your sensitive personal data (SSN, passport, address) never leaves your browser.
+> * **Preview:** The watermarked preview stays in the browser. The paid PDF is built after payment is confirmed and is not stored.
 > * **Zero Recurring Subscriptions:** Just a transparent, one-time payment of **$4.99** (no monthly rebills).
 > * **Broker-Ready PDF:** Instant, high-resolution print-ready documents formatted to CBP standards.
 > 
@@ -130,9 +130,9 @@ If you purchased brand-new furniture or high-end electronics within months of yo
 
 ---
 
-## 6. Line-by-Line Field Instructions (Official Rev. 05/24)
+## 6. Line-by-Line Field Instructions (Rev. 05/24)
 
-Always use the official, current **CBP Form 3299 (Rev. 05/24)**. Older revisions may trigger immediate rejection at customs entry processing.
+Always use the current **CBP Form 3299 (Rev. 05/24)** published by CBP. Older revisions may trigger immediate rejection at customs entry processing.
 
 ### Part I: Importer Information & Shipment Details
 
@@ -156,7 +156,7 @@ Mark the single checkbox that reflects your legal standing:
 
 ### Part III: Military Personnel & Evacuees Only
 
-* **Boxes 11–13:** **Leave completely blank** unless you are an active-duty member of the U.S. Armed Forces, a Department of Defense civilian employee, or an official government evacuee traveling under military travel orders.
+* **Boxes 11–13:** **Leave completely blank** unless you are an active-duty member of the U.S. Armed Forces, a Department of Defense civilian employee, or a government evacuee traveling under military travel orders.
 
 ### Part IV: Declaration of Articles
 
@@ -189,7 +189,7 @@ Filing Form 3299 alone is not sufficient. Your licensed customs broker must bund
 
 1. **Copy of Passport Biographical Page:** Demonstrates legal identity.
 2. **U.S. Visa or ESTA / Permanent Resident Card:** Proves legal entry status.
-3. **CBP Electronic I-94 Arrival Record:** Downloadable from the official [CBP I-94 Portal](https://i94.cbp.dhs.gov) once you land in the U.S.
+3. **CBP Electronic I-94 Arrival Record:** Downloadable from the [CBP I-94 portal](https://i94.cbp.dhs.gov) once you land in the U.S.
 4. **Ocean Bill of Lading (OBL) or Air Waybill (AWB):** Provided by your shipping line or air carrier.
 5. **Itemized Customs Packing List & Inventory:** A piece-by-piece list detailing carton numbers, contents, and estimated replacement values. *(Auto-generated when using [cbpform3299.com](https://cbpform3299.com)).*
 

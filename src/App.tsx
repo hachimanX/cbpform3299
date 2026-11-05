@@ -32,7 +32,6 @@ export function App() {
       {/* Top Navigation */}
       <Navbar
         onStartGenerator={scrollToWizard}
-        onOpenLegal={(page) => setLegalModalPage(page)}
       />
 
       {/* Hero Section */}
@@ -43,9 +42,7 @@ export function App() {
 
       {/* Main Interactive Questionnaire & Generator */}
       <main className="flex-1">
-        <WizardContainer
-          onOpenLegal={(page) => setLegalModalPage(page)}
-        />
+        <WizardContainer />
 
         {/* Pricing Comparison */}
         <PricingSection
@@ -63,19 +60,16 @@ export function App() {
 
       {/* Footer with Compliance & Disclaimers */}
       <Footer
-        onOpenLegal={(page) => setLegalModalPage(page)}
+        onEraseData={() => setLegalModalPage('deletion')}
       />
 
       {/* GDPR / Cookie Banner */}
-      <CookieBanner
-        onOpenPrivacy={() => setLegalModalPage('privacy')}
-      />
+      <CookieBanner />
 
       {/* Legal Modals (Terms, Privacy, Refund, Disclaimers, Data Deletion) */}
       <LegalModals
         page={legalModalPage}
         onClose={() => setLegalModalPage(null)}
-        onSelectPage={(p) => setLegalModalPage(p)}
       />
     </div>
   );

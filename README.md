@@ -12,17 +12,16 @@ Designed for international relocators, returning U.S. expats, work visa holders 
    - Converts confusing legal and tariff terms into 4 intuitive, guided steps.
    - Smart conditional logic automatically fills out Part I (Personal/Flight), Part II (Residency Status), Part III (U.S. Personnel), Part IV (Household Goods & Alcohol Declarations), and Part VI (Certification).
 
-2. **Official AcroForm Compliance:**
-   - Compiles user answers directly onto the official **CBP Form 3299 (Rev. 05/24)** vector template.
-   - Accepted by all international freight forwarders, ocean shipping lines, air cargo carriers, and licensed customs brokers.
+2. **Form layout:**
+   - Compiles user answers onto the **CBP Form 3299 (Rev. 05/24)** template published by CBP.
+   - Whether a carrier or broker accepts a filing is up to them.
 
-3. **100% In-Browser Privacy (Zero Cloud Storage):**
-   - Built entirely client-side using `pdf-lib`.
-   - **No passport numbers, SSNs, flight details, or home addresses are ever uploaded or saved to any external server.**
-   - All PDF processing occurs locally in the user's browser.
+3. **Privacy:**
+   - The draft and the watermarked preview stay in the browser.
+   - The clean PDF is built by the payment worker only after Stripe reports `payment_status === "paid"`. Those answers are not stored.
 
 4. **Strategic Pricing & Psychological Value:**
-   - Price anchored at **~~$9.99~~ slashed to $4.99** (50% OFF Launch Special).
+   - One-time price of **$4.99**. Do not advertise a crossed-out higher price unless that price was really charged.
    - Prominently positioned as **"One-Time Payment • NEVER a Subscription • No Hidden Fees"** (the exact opposite of predatory monthly fees like PDFfiller and DocuSign).
    - Free watermarked preview available so users can verify output before purchasing.
 
@@ -36,7 +35,7 @@ Designed for international relocators, returning U.S. expats, work visa holders 
 Every critical item from the legal compliance checklist has been integrated:
 1. **Privacy Policy Modal:** Dedicated policy detailing zero-server data retention.
 2. **Terms of Service:** Commercial software terms defining non-brokerage scope.
-3. **14-Day Refund Policy:** Clear 100% money-back guarantee if rejected by carrier.
+3. **14-Day Refund Policy:** Full refund by email, no questions asked. See `/refund/`.
 4. **Cookie Policy:** Details only strictly necessary local storage is utilized.
 5. **Cookie Consent Banner:** Non-intrusive, dismissible consent banner.
 6. **Form Review Consent:** Mandatory checkbox requiring declarant to review data before export.
@@ -101,12 +100,8 @@ The project is pre-configured for automated GitHub Pages deployment:
 
 ---
 
-## 💳 Connecting Live Stripe Checkout
+## Payments
 
-Currently, the application includes a **Test Mode & Instant Unlock** simulation that generates celebratory confetti and immediately downloads the watermark-free official PDF and packing list.
+The Pay button opens the Stripe Payment Link. A `?paid=true` or `?payment=success` return does **not** unlock the clean PDF.
 
-When you're ready to accept live payments:
-1. Create a **$4.99 Payment Link** in your Stripe Dashboard.
-2. In the Stripe Payment Link settings, set the **Confirmation Page** redirect URL to:
-   `https://cbpform3299.com/?paid=true`
-3. In `StepReviewExport.tsx`, link the button directly to your Stripe Payment Link. Users will pay on Stripe and be returned back with their clean download unlocked!
+The clean PDF is returned by the Cloudflare Worker in `worker/` only after Stripe reports `payment_status === "paid"`. Follow [SETUP-PAYMENTS.md](SETUP-PAYMENTS.md) before relying on automatic downloads. Until that setup is done, the Pay button still opens Stripe, and a buyer who already paid is told to email the contact address instead of paying again.

@@ -68,7 +68,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
                 <span className="text-xs font-extrabold text-blue-600 uppercase tracking-wider">Part III</span>
                 <h4 className="font-bold text-slate-900 text-base">U.S. Personnel &amp; Evacuees Only</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Reserved strictly for U.S. military service members, Department of Defense contractors, foreign service diplomats, and official evacuees entering under government travel orders. Civilians must leave this part blank.
+                  Reserved for U.S. military service members, Department of Defense contractors, foreign service diplomats, and evacuees entering under government travel orders. Civilians must leave this part blank.
                 </p>
               </div>
 
@@ -191,7 +191,7 @@ export const SeoGuide: React.FC<SeoGuideProps> = ({ onStartGenerator }) => {
               Ready to generate your compliant Form 3299?
             </h3>
             <p className="text-xs text-slate-300">
-              Skip the manual paperwork. Answer our guided questions and get your official print-ready PDF in 3 minutes.
+              Skip the manual paperwork. Answer our guided questions and download your filled PDF in a few minutes.
             </p>
           </div>
 

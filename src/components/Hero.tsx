@@ -94,10 +94,10 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onScrollToGuide }) => {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-white flex items-center space-x-1.5">
-                  <span>100% In-Browser Privacy</span>
+                  <span>Preview stays in your browser</span>
                 </h3>
                 <p className="text-xs text-slate-400 mt-1 leading-normal">
-                  Your passport, SSN, and addresses are processed strictly inside your device. Zero cloud storage or server logging.
+                  The draft and watermarked preview stay on this device. The paid PDF is built only after Stripe confirms payment, and those answers are not stored.
                 </p>
               </div>
             </div>

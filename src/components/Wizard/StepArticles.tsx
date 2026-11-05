@@ -48,7 +48,7 @@ export const StepArticles: React.FC<StepArticlesProps> = ({ data, updateData, on
           <div>
             <h3 className="text-lg font-bold text-slate-900">4. Customs Declaration &amp; Categories (Part IV)</h3>
             <p className="text-xs text-slate-500">
-              Answer in plain English. We will check the exact legal tariff boxes on the official form.
+              Answer in plain English. We will check the matching boxes on CBP Form 3299.
             </p>
           </div>
         </div>

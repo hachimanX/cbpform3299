@@ -24,7 +24,7 @@ export const WatermarkPreviewModal: React.FC<WatermarkPreviewModalProps> = ({
 
   const handleDownload = async () => {
     if (pdfBytes) {
-      const { downloadPdf } = await import('../../lib/pdfGenerator');
+      const { downloadPdf } = await import('../../lib/downloadFile');
       downloadPdf(pdfBytes, fileName);
     }
   };

@@ -1,0 +1,12 @@
+name = "cbpform3299-pay"
+main = "worker/index.ts"
+compatibility_date = "2026-11-05"
+workers_dev = true
+
+# The Stripe secret is not stored in this file.
+# Set it with: npx wrangler secret put STRIPE_SECRET_KEY
+
+[[rules]]
+type = "Data"
+globs = ["**/*.pdf"]
+fallthrough = true

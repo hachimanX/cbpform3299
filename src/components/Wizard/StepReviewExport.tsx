@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { CBPFormData } from '../../types/form';
+import { SELLER_CONTACT_EMAIL } from '../../site';
+import {
+  CHECKOUT_SESSION_STORAGE_KEY,
+  STRIPE_CHECKOUT_URL,
+  readCheckoutSessionId,
+  requestCleanPdf,
+} from '../../lib/payments';
 import { WatermarkPreviewModal } from './WatermarkPreviewModal';
 import { 
   FileCheck, 
@@ -17,53 +24,95 @@ import {
 // pdf-lib and canvas-confetti are loaded on demand to keep the main bundle small
 const loadPdfGenerator = () => import('../../lib/pdfGenerator');
 const loadPackingListGenerator = () => import('../../lib/packingListGenerator');
+const loadDownload = () => import('../../lib/downloadFile');
 
-const STRIPE_CHECKOUT_URL = 'https://buy.stripe.com/6oU4gz2Y278m8wn667bZe01';
+type UnlockPhase = 'locked' | 'checking' | 'unlocked' | 'needs_setup' | 'unpaid' | 'failed';
 
 interface StepReviewExportProps {
   data: CBPFormData;
   updateData: (fields: Partial<CBPFormData>) => void;
   onPrev: () => void;
-  onOpenLegal: (page: 'terms' | 'privacy' | 'refund' | 'disclaimer') => void;
 }
 
 export const StepReviewExport: React.FC<StepReviewExportProps> = ({
   data,
   updateData,
   onPrev,
-  onOpenLegal,
 }) => {
   const [hasReviewedConsent, setHasReviewedConsent] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [previewBlobUrl, setPreviewBlobUrl] = useState<string | null>(null);
   const [previewPdfBytes, setPreviewPdfBytes] = useState<Uint8Array | null>(null);
   const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
-  const [isGeneratingClean, setIsGeneratingClean] = useState(false);
   const [isGeneratingPacking, setIsGeneratingPacking] = useState(false);
-  const [unlockedPurchased, setUnlockedPurchased] = useState(false);
+  const [unlockPhase, setUnlockPhase] = useState<UnlockPhase>('locked');
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  // Auto-detect return from Stripe payment
+  const dataRef = useRef(data);
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const isPaid = urlParams.get('payment') === 'success' || urlParams.get('paid') === 'true';
-    if (isPaid && !unlockedPurchased) {
-      setUnlockedPurchased(true);
+    dataRef.current = data;
+  });
 
-      // Trigger celebration confetti
-      import('canvas-confetti')
-        .then(({ default: confetti }) =>
-          confetti({
-            particleCount: 120,
-            spread: 80,
-            origin: { y: 0.6 },
-            colors: ['#f59e0b', '#3b82f6', '#10b981'],
-          }),
-        )
-        .catch(() => {});
+  const confirmPayment = async (id: string) => {
+    setUnlockPhase('checking');
+    setErrorMessage(null);
+    const result = await requestCleanPdf(id, dataRef.current);
+    if (result.status !== 'pdf') {
+      setUnlockPhase(result.status === 'not_configured' ? 'needs_setup' : result.status === 'unpaid' ? 'unpaid' : 'failed');
+      return;
+    }
 
-      // Auto-trigger clean download
-      handleDownloadClean();
+    try {
+      localStorage.setItem(CHECKOUT_SESSION_STORAGE_KEY, id);
+    } catch {
+      // The download still works for this visit if storage is blocked.
+    }
+    setSessionId(id);
+    setUnlockPhase('unlocked');
+
+    const { downloadBlob, cleanPdfFilename } = await loadDownload();
+    downloadBlob(result.blob, cleanPdfFilename(dataRef.current.lastName));
+
+    import('canvas-confetti')
+      .then(({ default: confetti }) =>
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#0f766e', '#f59e0b', '#10b981'],
+        }),
+      )
+      .catch(() => {});
+  };
+
+  // Return from Stripe only counts when the URL carries a checkout session id.
+  // ?paid=true and ?payment=success are ignored.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = readCheckoutSessionId(window.location.search);
+    const legacyBypass = params.get('paid') === 'true' || params.get('payment') === 'success';
+    if (fromUrl || legacyBypass) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('session_id');
+      url.searchParams.delete('paid');
+      url.searchParams.delete('payment');
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+    if (fromUrl) {
+      setSessionId(fromUrl);
+      void confirmPayment(fromUrl);
+      return;
+    }
+    // Old success URLs are not proof of payment. Tell the visitor not to pay twice.
+    if (legacyBypass) {
+      setUnlockPhase('needs_setup');
+      return;
+    }
+    try {
+      const stored = localStorage.getItem(CHECKOUT_SESSION_STORAGE_KEY);
+      if (stored && /^cs_[A-Za-z0-9_]+$/.test(stored)) setSessionId(stored);
+    } catch {
+      // Ignore storage failures.
     }
   }, []);
 
@@ -78,8 +127,8 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
         return;
       }
 
-      const { generateCBPForm3299 } = await loadPdfGenerator();
-      const pdfBytes = await generateCBPForm3299(data, { isWatermarked: true });
+      const { generateWatermarkedPreview } = await loadPdfGenerator();
+      const pdfBytes = await generateWatermarkedPreview(data);
       const buffer = pdfBytes.buffer.slice(pdfBytes.byteOffset, pdfBytes.byteOffset + pdfBytes.byteLength) as ArrayBuffer;
       const blob = new Blob([buffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
@@ -101,10 +150,13 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
       setIsGeneratingPreview(true);
       setErrorMessage(null);
 
-      const { generateCBPForm3299, downloadPdf } = await loadPdfGenerator();
+      const [{ generateWatermarkedPreview }, { downloadPdf }] = await Promise.all([
+        loadPdfGenerator(),
+        loadDownload(),
+      ]);
       let bytes = previewPdfBytes;
       if (!bytes) {
-        bytes = await generateCBPForm3299(data, { isWatermarked: true });
+        bytes = await generateWatermarkedPreview(data);
         setPreviewPdfBytes(bytes);
       }
 
@@ -118,22 +170,9 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
     }
   };
 
-  // Download Clean PDF (Post-Purchase). Consent was already given before checkout,
-  // and the page reloads on return from Stripe, so it is not re-checked here.
-  const handleDownloadClean = async () => {
-    try {
-      setIsGeneratingClean(true);
-      setErrorMessage(null);
-      const { generateCBPForm3299, downloadPdf } = await loadPdfGenerator();
-      const pdfBytes = await generateCBPForm3299(data, { isWatermarked: false });
-      downloadPdf(pdfBytes, `CBP_Form_3299_${data.lastName || 'DECLARATION'}.pdf`);
-      setUnlockedPurchased(true);
-    } catch (err: any) {
-      console.error(err);
-      setErrorMessage(err.message || 'Failed to generate clean PDF');
-    } finally {
-      setIsGeneratingClean(false);
-    }
+  const handleDownloadClean = () => {
+    if (!sessionId || unlockPhase === 'checking') return;
+    void confirmPayment(sessionId);
   };
 
   // Redirect to Stripe Checkout
@@ -157,7 +196,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
       setIsGeneratingPacking(true);
       const [{ generatePackingListPdf }, { downloadPdf }] = await Promise.all([
         loadPackingListGenerator(),
-        loadPdfGenerator(),
+        loadDownload(),
       ]);
       const packingBytes = await generatePackingListPdf(data);
       downloadPdf(packingBytes, `CBP_3299_Supplemental_Packing_List_${data.lastName || 'DECLARATION'}.pdf`);
@@ -305,19 +344,18 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
             />
             <span className="text-xs text-amber-950 leading-relaxed">
               <strong>Accuracy Confirmation &amp; Disclaimer:</strong> I certify that I have reviewed the information entered above. I understand that cbpform3299.com is an independent automated document preparation utility, not affiliated with U.S. Customs and Border Protection (CBP) or any government agency, and does not provide legal advice. I am solely responsible for the truthfulness and accuracy of my declarations upon signing and submitting to customs officials.{' '}
-              <button
-                type="button"
-                onClick={() => onOpenLegal('disclaimer')}
+              <a
+                href="/about/#notice"
                 className="underline text-blue-700 hover:text-blue-900 font-semibold"
               >
-                Read Legal Notice
-              </button>
+                Read the notice
+              </a>
             </span>
           </label>
         </div>
       </div>
 
-      {unlockedPurchased && (
+      {unlockPhase === 'unlocked' && (
         <div className="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-300 text-emerald-950 text-sm shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-in">
           <div className="flex items-center space-x-3">
             <div className="p-2 rounded-full bg-emerald-600 text-white shrink-0">
@@ -326,7 +364,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
             <div>
               <div className="font-extrabold text-emerald-900 text-base">Payment Verified &amp; Unlocked!</div>
               <p className="text-xs text-emerald-700">
-                Your clean vector CBP Form 3299 has been generated. You can download your official PDF and packing list below anytime.
+                Stripe confirmed this payment. Your clean Form 3299 PDF has been downloaded. You can download it again below. The packing list is free.
               </p>
             </div>
           </div>
@@ -334,12 +372,30 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
           <button
             type="button"
             onClick={handleDownloadClean}
-            disabled={isGeneratingClean}
             className="px-5 py-2.5 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-colors shrink-0 cursor-pointer flex items-center justify-center space-x-1.5"
           >
             <Download className="w-4 h-4" />
             <span>Re-Download Clean PDF</span>
           </button>
+        </div>
+      )}
+
+      {unlockPhase === 'needs_setup' && (
+        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 text-sm">
+          We could not confirm a paid checkout from this visit. If you already paid, do not pay again. Email{' '}
+          <a className="underline font-semibold" href={`mailto:${SELLER_CONTACT_EMAIL}`}>{SELLER_CONTACT_EMAIL}</a>{' '}
+          and include your Stripe receipt. Your answers stay in this browser.
+        </div>
+      )}
+
+      {(unlockPhase === 'unpaid' || unlockPhase === 'failed') && (
+        <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 text-sm">
+          {unlockPhase === 'unpaid'
+            ? 'Stripe did not report this checkout as paid.'
+            : 'The payment check did not respond.'}{' '}
+          If you paid, email{' '}
+          <a className="underline font-semibold" href={`mailto:${SELLER_CONTACT_EMAIL}`}>{SELLER_CONTACT_EMAIL}</a>{' '}
+          with your Stripe receipt. You can try the download again.
         </div>
       )}
 
@@ -361,7 +417,7 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
             </div>
             <h4 className="text-xl font-bold text-slate-900">Uneditable Watermarked PDF</h4>
             <p className="text-xs text-slate-500 leading-relaxed">
-              Proofread your full declaration formatted on the official CBP layout before purchasing. All fields are locked to read-only with verification watermarks. Moving carriers and customs brokers require the clean vector PDF.
+              Proofread your declaration on the CBP Form 3299 layout before you pay. The preview is watermarked and locked. The clean PDF is available after payment is confirmed.
             </p>
 
             <ul className="text-xs text-slate-600 space-y-1.5 pt-2">
@@ -445,21 +501,25 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
               </li>
               <li className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>14-Day Acceptance Guarantee (carrier rejection proof required)</span>
+                <span>Full refund within 14 days by email. No questions asked.</span>
               </li>
             </ul>
           </div>
 
           <div className="space-y-2.5 pt-2">
-            {unlockedPurchased ? (
+            {unlockPhase === 'needs_setup' && !sessionId ? (
+              <p className="text-center text-sm text-amber-100">
+                The pay button is hidden so you are not charged twice. Email the address above with your Stripe receipt.
+              </p>
+            ) : sessionId ? (
               <button
                 type="button"
                 onClick={handleDownloadClean}
-                disabled={isGeneratingClean}
-                className="w-full py-4 px-6 rounded-xl text-base font-extrabold text-slate-950 bg-gradient-to-r from-emerald-400 via-emerald-300 to-green-400 hover:from-emerald-300 hover:to-emerald-400 shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer"
+                disabled={unlockPhase === 'checking'}
+                className="w-full py-4 px-6 rounded-xl text-base font-extrabold text-slate-950 bg-gradient-to-r from-emerald-400 via-emerald-300 to-green-400 hover:from-emerald-300 hover:to-emerald-400 shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-60"
               >
                 <Download className="w-5 h-5 text-slate-950" />
-                <span>Download Print-Ready Form 3299 Now</span>
+                <span>{unlockPhase === 'checking' ? 'Checking payment...' : 'Download clean PDF'}</span>
               </button>
             ) : (
               <button
@@ -486,13 +546,12 @@ export const StepReviewExport: React.FC<StepReviewExportProps> = ({
             </button>
 
             <div className="text-center pt-1">
-              <button
-                type="button"
-                onClick={() => onOpenLegal('refund')}
-                className="text-xs text-slate-400 hover:text-slate-200 underline cursor-pointer"
+              <a
+                href="/refund/"
+                className="text-xs text-slate-400 hover:text-slate-200 underline"
               >
-                14-Day Guarantee Terms &amp; Carrier Rejection Policy
-              </button>
+                14-day refund policy
+              </a>
             </div>
           </div>
         </div>

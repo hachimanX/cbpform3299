@@ -67,7 +67,7 @@ When FedEx freezes your package, the clock immediately begins ticking:
 ## 3. Clear Your FedEx Hold in Minutes (Generator Embed)
 
 > ### ⚡ Clear Your FedEx Customs Hold Instantly
-> Resolve your FedEx clearance delay today. Answer guided prompts—our engine formats official **CBP Form 3299 (Rev. 05/24)** with your exact FedEx Air Waybill and generates your itemized baggage inventory in minutes.
+> Resolve your FedEx clearance delay today. Answer guided prompts—our engine fills in **CBP Form 3299 (Rev. 05/24)** with your exact FedEx Air Waybill and generates your itemized baggage inventory in minutes.
 > 
 > * **100% Client-Side Privacy:** Your sensitive passport, SSN, and address remain private on your device.
 > * **Zero Subscriptions:** One flat payment of **$4.99** (no monthly recurring charges).

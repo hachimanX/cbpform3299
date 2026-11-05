@@ -97,7 +97,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
                 </li>
                 <li className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>100% In-Browser Privacy (Zero server storage)</span>
+                  <span>Watermarked preview stays in your browser</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -105,7 +105,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onStartGenerator
                 </li>
                 <li className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>14-Day Layout Guarantee (with carrier proof)</span>
+                  <span>Full refund within 14 days by email, no questions asked</span>
                 </li>
               </ul>
             </div>

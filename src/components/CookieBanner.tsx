@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Cookie } from 'lucide-react';
 
-interface CookieBannerProps {
-  onOpenPrivacy: () => void;
-}
-
-export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => {
+export const CookieBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -42,12 +38,12 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ onOpenPrivacy }) => 
         <div className="space-y-2 text-xs leading-relaxed text-slate-300">
           <p>
             We use Google Analytics only if you accept. No advertising cookies. Your form draft stays in your browser.{' '}
-            <button
-              onClick={onOpenPrivacy}
+            <a
+              href="/privacy/"
               className="text-amber-400 underline hover:text-amber-300 font-medium"
             >
-              Privacy Policy
-            </button>
+              Privacy policy
+            </a>
           </p>
 
           <div className="flex items-center space-x-2 pt-1">
